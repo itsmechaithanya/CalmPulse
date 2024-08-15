@@ -12,8 +12,8 @@ function FirstPage() {
        <span className=' absolute top-[27%]'>
             <img src={mid} alt="" />
        </span>
-       <button className='bg-black text-white px-14 py-3 text-xl rounded-full absolute top-[62%] left-[27%]'>Sign Up</button>
-       <h1 className=' absolute top-[69%] left-[20%] text-white'>Already have an account?
+       <button className='bg-black text-white px-20 py-4 text-xl rounded-full absolute top-[62%] left-[23%]'>Sign Up</button>
+       <h1 className=' absolute top-[70%] left-[20%] text-white'>Already have an account?
             <span className='text-black text-xl'>
                 <a href=""> Login</a>
             </span>
