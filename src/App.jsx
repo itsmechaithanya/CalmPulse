@@ -1,7 +1,7 @@
 import React from 'react'
 import FirstPage from './Components/FirstPage'
 
-function  App() {
+function   App() {
   return (
     <div>
       <FirstPage />
