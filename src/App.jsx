@@ -1,10 +1,12 @@
 import React from 'react'
 import FirstPage from './Components/FirstPage'
+import Secondpage from './Components/Secondpage'
 
 function   App() {
   return (
     <div>
-      <FirstPage /> 
+      {/* <FirstPage />  */}
+      <Secondpage/>
     </div>
   )
 }
