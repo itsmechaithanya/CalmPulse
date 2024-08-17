@@ -4,7 +4,7 @@ import FirstPage from './Components/FirstPage'
 function  App() {
   return (
     <div>
-      <FirstPage />
+      <FirstPage /> 
     </div>
   )
 }
