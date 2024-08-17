@@ -7,7 +7,7 @@ function FirstPage() {
   return (
     <div className='h-screen w-screen overflow-hidden bg-[#7A4BC8] relative'>
         <span className='absolute top-[10%]'>
-            <img src={logo} alt="" />
+            <img src={logo} alt="" /> 
         </span>
        <span className=' absolute top-[27%]'>
             <img src={mid} alt="" />
