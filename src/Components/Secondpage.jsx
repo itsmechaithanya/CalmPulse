@@ -2,7 +2,7 @@ import React from 'react'
 
 function Secondpage() {
   return (
-    <div>Secondpage</div>
+    <div>hello</div>
   )
 }
 
