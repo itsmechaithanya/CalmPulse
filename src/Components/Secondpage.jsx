@@ -2,7 +2,6 @@ import React from 'react'
 import imgg from '../assets/b08f403ff43bbe883c702ab13eccb016.png'
 import imggg from '../assets/247ade28c862c6b10881b9307e6df568.png'
 import { FcGoogle } from "react-icons/fc";
-import { IconContext } from "react-icons";
 
 function Secondpage() {
   return (
@@ -15,6 +14,22 @@ function Secondpage() {
         <div className='flex justify-center mt-2'>
             <h1 className=' capitalize'>Or continue with Email</h1>
         </div>
+        <div className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10'>
+          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter your name ' />
+          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter your phone number ' />
+          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter your name ' />
+          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter your name ' />
+        </div>
+        <div className='flex items-center px-3 mt-5'>
+          <input className='h-5 w-5 ml-4 mr-5 bg-red-900' type="checkbox" />
+          <h1 className='text-white '>I agree with the Terms of Service and Privacy policy</h1>
+        </div>
+          <div className='flex justify-end mt-5 mr-5'>
+            <button className='bg-black text-white px-8 py-5 rounded-full'>Create Account</button>
+          </div>
+          <div className='flex justify-end mr-5 mt-2 text-white'> 
+            <h1><a href="">Already have an account?</a></h1>
+          </div>
         <img className='absolute -bottom-[30vh] -left-[11vh] h-[60vh]' src={imgg} alt="" />
             
     </div>
