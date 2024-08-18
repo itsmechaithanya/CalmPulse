@@ -18,7 +18,7 @@ function LoginPage() {
         <div className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10'>
           <input className='py-4 px-7 rounded-full' type="text" placeholder='Username or Email' />
           <input className='py-4 px-7 rounded-full' type="text" placeholder='Password' />
-          <div className='flex justify-end mr-5'>
+          <div className='flex justify-end mr-5 text-white'>
             <a href="">Forgot?</a>
           </div>
         </div>

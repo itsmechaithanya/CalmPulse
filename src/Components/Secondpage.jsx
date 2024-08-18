@@ -15,20 +15,23 @@ function Secondpage() {
             <h1 className=' capitalize'>Or continue with Email</h1>
         </div>
         <div className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10'>
-          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter your name ' />
-          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter your phone number ' />
-          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter your name ' />
-          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter your name ' />
+          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter Your Name ' />
+          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter Your Phone number ' />
+          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter Your Email' />
+          <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter Your Password ' />
         </div>
         <div className='flex items-center px-3 mt-5'>
           <input className='h-5 w-5 ml-4 mr-5 bg-red-900 shadow' type="checkbox" />
-          <h1 className='text-white '>I agree with the Terms of Service and Privacy policy</h1>
+          <h1 className='text-white capitalize'>I agree with the Terms of Service and Privacy policy</h1>
         </div>
-          <div className='flex justify-end mt-5 mr-5'>
-            <button className='bg-black text-white px-8 py-5 rounded-full shadow'>Create Account</button>
+          <div className='flex justify-end mt-5 mr-20 '>
+            <button className='bg-black text-white  px-8 py-5 rounded-full shadow'>Create Account</button>
           </div>
-          <div className='flex justify-end mr-5 mt-2 text-white'> 
-            <h1><a href="">Already have an account?</a></h1>
+          <div className='flex justify-end mt-10 mr-5 text-white'> 
+            <h1 className=' capitalize'><a href="">Already have an account?</a></h1>
+          </div>
+          <div className='flex justify-end mt-2 mr-5 '>
+            <button className='bg-black text-white px-16 py-5 rounded-full shadow'>Log In</button>
           </div>
         <img className='absolute -bottom-[30vh] -left-[11vh] h-[60vh]' src={imgg} alt="" />
             
