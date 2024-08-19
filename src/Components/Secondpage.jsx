@@ -20,7 +20,7 @@ function Secondpage() {
           <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter Your Email' />
           <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter Your Password ' />
         </div>
-        <div className='flex items-center px-3 mt-5'>
+        <div className='flex items-center px-3 mt-5'> 
           <input className='h-5 w-5 ml-4 mr-5 bg-red-900 shadow' type="checkbox" />
           <h1 className='text-white capitalize'>I agree with the Terms of Service and Privacy policy</h1>
         </div>
