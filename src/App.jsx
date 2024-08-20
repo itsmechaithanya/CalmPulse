@@ -15,14 +15,14 @@ function   App() {
     Password:'123456',
   }])
   return (
-    <div>
-      {/* <Landing/> */}
+    <>
+      <Landing/>
       {/* <SignUp/> */}
       {/* <LoginPage/> */}
       {/* <Details/> */}
-      <Home/>
+      {/* <Home/> */}
 
-    </div>
+    </>
   )
 }
 
