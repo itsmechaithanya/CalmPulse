@@ -3,7 +3,7 @@ import logo from '../assets/logo.png'
 import mid from '../assets/mid.png'
 import FirstPageOne from '../assets/FirstPageOne.png'
 
-function FirstPage() {
+function Home() {
   return (
     <div className='h-screen w-screen overflow-hidden bg-[#7A4BC8] relative'>
         <span className='absolute top-[10%]'>
@@ -25,4 +25,4 @@ function FirstPage() {
   )
 }
 
-export default FirstPage
+export default Home

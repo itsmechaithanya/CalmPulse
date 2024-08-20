@@ -1,14 +1,17 @@
 import React from 'react'
-import FirstPage from './Components/FirstPage'
-import Secondpage from './Components/Secondpage'
+import Home from './Components/Home'
+import SignUp from './Components/SIgnUp'
 import LoginPage from './Components/LoginPage'
+import Details from './Components/Details'
 
 function   App() {
   return (
     <div>
-      {/* <FirstPage />  */}
-      {/* <Secondpage/> */}
-      <LoginPage/>
+      {/* <Home/> */}
+      {/* <SignUp/> */}
+      {/* <LoginPage/> */}
+      <Details/>
+
     </div>
   )
 }

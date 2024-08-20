@@ -3,7 +3,7 @@ import imgg from '../assets/b08f403ff43bbe883c702ab13eccb016.png'
 import imggg from '../assets/247ade28c862c6b10881b9307e6df568.png'
 import { FcGoogle } from "react-icons/fc";
 
-function Secondpage() {
+function SignUp() {
   return (
     <div className='h-screen w-screen bg-[#7A4BC8] overflow-hidden relative'>
         <img className='h-[20vh] absolute -top-[5vh] -right-2' src={imggg} alt="" />
@@ -39,4 +39,4 @@ function Secondpage() {
   )
 }
 
-export default Secondpage
+export default SignUp
