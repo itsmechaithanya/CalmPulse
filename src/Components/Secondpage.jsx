@@ -12,7 +12,7 @@ function Secondpage() {
             <button className='text-white bg-black px-8 flex justify-center items-center py-5 rounded-full gap-3 shadow'><FcGoogle size={"1.5em"} />Sign up with Google</button>
         </div>
         <div className='flex justify-center mt-2'>
-            <h1 className=' capitalize'>Or continue with Email</h1>
+            <h1 className=' capitalize'>Or continue with Email</h1>  
         </div>
         <div className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10'>
           <input className='py-4 px-7 rounded-full' type="text" placeholder='Enter Your Name ' />
