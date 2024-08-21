@@ -18,7 +18,7 @@ function Landing() {
                 <a href=""> Login</a>
             </span>
         </h1>
-        <span className=' absolute bottom-[-25%]'>
+        <span className=' absolute bottom-[-18vh]'>
             <img src={FirstPageOne} alt="" />
         </span>
     </div>
