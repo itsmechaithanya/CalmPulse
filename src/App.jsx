@@ -16,13 +16,13 @@ function   App() {
   }])
   return (
     <>
-      <Landing/>
+      {/* <Landing/> */}
       {/* <SignUp/> */}
       {/* <LoginPage/> */}
       {/* <Details/> */}
-      {/* {data.map((items)=>(
+      {data.map((items)=>(
         <Home name={items.name}/>
-      ))} */}
+      ))}
     </>
   )
 }
