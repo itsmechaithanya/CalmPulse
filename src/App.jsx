@@ -16,8 +16,8 @@ function   App() {
   }])
   return (
     <>
-      <Landing/>
-      {/* <SignUp/> */}
+      {/* <Landing/> */}
+      <SignUp/>
       {/* <LoginPage/> */}
       {/* <Details/> */}
       {/* <Home/> */}
