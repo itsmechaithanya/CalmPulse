@@ -14,6 +14,12 @@ function   App() {
     email:'vaishnavi@gmail.com',
     password:'123456',
   }])
+
+  useState([{
+    question:'How long have you been working as a software engineer?',
+    
+  }])
+
   return (
     <>
       {/* <Landing/> */}
