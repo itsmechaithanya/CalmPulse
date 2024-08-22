@@ -7,22 +7,30 @@ import Home from './Components/Home'
 
 function   App() {
   const [data,setdata] = useState([{
-    Name:'Vaishnavi',
-    Date:'20/08/24',
-    Gender:'Female',
-    PhoneNumber:123456789,
-    Email:'vaishnavi@gmail.com',
-    Password:'123456',
+    name:'Vaishnavi',
+    date:'20/08/24',
+    gender:'Female',
+    phoneNumber:123456789,
+    email:'vaishnavi@gmail.com',
+    password:'123456',
   }])
+
+  useState([{
+    question:'How long have you been working as a software engineer?',
+    
+  }])
+
   return (
     <>
-      <Landing/>
+      {/* <Landing/> */}
       {/* <SignUp/> */}
       {/* <LoginPage/> */}
       {/* <Details/> */}
-      {/* <Home/> */}
+      {data.map((items)=>(
+        <Home name={items.name}/>
+      ))}
     </>
   )
 }
 
-export default App
+export default App

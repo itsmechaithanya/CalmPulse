@@ -18,11 +18,11 @@ function Landing() {
                 <a href=""> Login</a>
             </span>
         </h1>
-        <span className=' absolute bottom-[-15%]'>
+        <span className=' absolute bottom-[-18vh]'>
             <img src={FirstPageOne} alt="" />
         </span>
     </div>
   )
 }
 
-export default Landing
+export default Landing
