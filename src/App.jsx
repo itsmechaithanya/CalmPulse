@@ -20,7 +20,7 @@ function App() {
 
   const [questionData, setQuestionData] = useState([{
     question: 'Have you seen any change in your self care or stopped doing it?', 
-    imgs: selfCareImage,
+    imgs: selfCareImage, 
     Yes:false,
     No:false,
   }]);
