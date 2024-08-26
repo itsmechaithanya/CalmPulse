@@ -5,7 +5,7 @@ import SignUp from 'src\Components\SignUp.jsx';
 import LoginPage from './Components/LoginPage';
 import Details from './Components/Details';
 import Home from './Components/Home';
-import questions from 'src\Components\Questions.jsx'
+import Questions from './Components/Questions'
 
 function App() {
   const [data, setData] = useState([{
