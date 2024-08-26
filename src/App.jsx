@@ -5,6 +5,7 @@ import SignUp from 'src\Components\SignUp.jsx';
 import LoginPage from './Components/LoginPage';
 import Details from './Components/Details';
 import Home from './Components/Home';
+import questions from 'src\Components\Questions.jsx'
 
 function App() {
   const [data, setData] = useState([{
@@ -16,7 +17,6 @@ function App() {
     password: '123456',
   }]);
 
-  // The second useState is redundant unless you need to use the data.
   const [questionData, setQuestionData] = useState([{
     question: 'How long have you been working as a software engineer?',
   }]);
@@ -28,6 +28,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/details" element={<Details />} />
+        <Route path="/questions" element={<Details />} />
         <Route 
           path="/home" 
           element={
