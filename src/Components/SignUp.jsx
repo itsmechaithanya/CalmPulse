@@ -28,7 +28,7 @@ function SignUp() {
           <h1 className='text-white capitalize'>I agree with the Terms of Service and Privacy policy</h1>
         </div>
         <div className='flex justify-end mt-5 mr-20 '>
-          <Link to="/details">
+          <Link to="/Details">
             <button className='bg-black text-white px-8 py-5 rounded-full shadow'>
               Create Account
             </button>

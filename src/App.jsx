@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './Components/Landing';
-import SignUp from 'src\Components\SignUp.jsx';
-import LoginPage from './Components/LoginPage';
+import SignUp from '\Components\SignUp.jsx';
+import LoginPage from 'src\Components\LoginPage.jsx';
 import Details from './Components/Details';
 import Home from './Components/Home';
-import questions from 'src\Components\Questions.jsx'
+import Questions from 'src\Components\Questions.jsx'
 
 function App() {
   const [data, setData] = useState([{
