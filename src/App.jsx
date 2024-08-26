@@ -6,6 +6,7 @@ import LoginPage from './Components/LoginPage';
 import Details from './Components/Details';
 import Home from './Components/Home';
 import Questions from './Components/Questions'
+import selfCareImage from './assets/iPhone 15/selfcare-removebg-preview 1.png';
 
 function App() {
   const [data, setData] = useState([{
@@ -18,7 +19,10 @@ function App() {
   }]);
 
   const [questionData, setQuestionData] = useState([{
-    question: 'How long have you been working as a software engineer?',
+    question: 'Have you seen any change in your self care or stopped doing it?', 
+    imgs: selfCareImage,
+    Yes:false,
+    No:false,
   }]);
 
   return (
@@ -28,12 +32,18 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/details" element={<Details />} />
-        <Route path="/questions" element={<Questions />} />
         <Route 
           path="/home" 
           element={
             data.map((item, index) => (
               <Home key={index} name={item.name} />
+            ))
+          }
+        />
+        <Route path="/questions" 
+          element={
+            questionData.map((items, index) => (
+              <Questions key={index} question={items.question} img={items.imgs} Yes={items.Yes} No={items.No} />
             ))
           }
         />
