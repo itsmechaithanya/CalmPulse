@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom'; 
 import imgg from '../assets/b08f403ff43bbe883c702ab13eccb016.png';
 import imggg from '../assets/247ade28c862c6b10881b9307e6df568.png';
 import imgggg from '../assets/iPhone 13/reflecting 1.png';
@@ -26,7 +26,6 @@ function LoginPage() {
           </div>
         </div>
         <div className='flex justify-center mt-5 '>
-          {/* Navigate to home page after logging in */}
           <Link to="/home">
             <button className='bg-black text-white px-16 py-4 rounded-full shadow'>
               Log In
@@ -39,7 +38,6 @@ function LoginPage() {
             <h1 className='capitalize text-white mb-3'>
               Don't have an account?
             </h1>
-            {/* Navigate to Sign Up page */}
             <Link to="/signup">
               <button className='bg-black text-white px-10 py-5 ml-4 rounded-full shadow'>
                 Sign Up
