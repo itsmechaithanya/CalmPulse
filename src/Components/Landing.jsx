@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png'
 import mid from '../assets/mid.png'
 import FirstPageOne from '../assets/FirstPageOne.png'
@@ -12,10 +13,12 @@ function Landing() {
        <span className=' absolute top-[27%]'>
             <img src={mid} alt="" />
        </span>
-       <button className='bg-black text-white px-20 py-4 text-xl rounded-2xl absolute top-[62%] left-[23%]'>Sign Up</button>
+       <Link to="/signup">
+  <button className='bg-black text-white px-20 py-4 text-xl rounded-2xl absolute top-[62%] left-[23%]'> Sign Up </button>
+  </Link>
        <h1 className=' absolute top-[70%] left-[20%] text-white'>Already have an account?
             <span className='text-black text-xl'>
-                <a href=""> Login</a>
+            <Link to="/login"> Login</Link>
             </span>
         </h1>
         <span className=' absolute bottom-[-18vh]'>

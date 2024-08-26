@@ -2,6 +2,7 @@ import React from 'react'
 import 'remixicon/fonts/remixicon.css'
 import white from '../assets/iPhone 14/c1-removebg-preview 1.png'
 
+
 function Home({name}) {
   return (
     <div className='h-screen w-screen bg-[#7A4BC8]'>
