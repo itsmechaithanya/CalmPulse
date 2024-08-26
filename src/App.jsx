@@ -5,7 +5,7 @@ import SignUp from './Components/SignUp';
 import LoginPage from './Components/LoginPage';
 import Details from './Components/Details';
 import Home from './Components/Home';
-import questions from 'src\Components\Questions.jsx'
+import Questions from 'src\Components\Questions.jsx'
 
 function App() {
   const [data, setData] = useState([{
@@ -28,7 +28,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/details" element={<Details />} />
-        <Route path="/questions" element={<Details />} />
+        <Route path="/questions" element={<Questions />} />
         <Route 
           path="/home" 
           element={
