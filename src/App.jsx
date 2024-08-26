@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './Components/Landing';
-import SignUp from '\Components\SignUp.jsx';
-import LoginPage from 'src\Components\LoginPage.jsx';
+import SignUp from 'src\Components\SignUp.jsx';
+import LoginPage from './Components/LoginPage';
 import Details from './Components/Details';
 import Home from './Components/Home';
-import Questions from 'src\Components\Questions.jsx'
+import questions from 'src\Components\Questions.jsx'
 
 function App() {
   const [data, setData] = useState([{
@@ -28,7 +28,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/details" element={<Details />} />
-        <Route path="/questions" element={<Details />} />
+        <Route path="/questions" element={<Questions />} />
         <Route 
           path="/home" 
           element={
