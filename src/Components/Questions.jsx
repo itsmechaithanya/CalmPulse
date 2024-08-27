@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function Questions({question,img,Yes,No}) {
+function Questions({question,img,Yes,No,buttonColor}) {
   return (
     <div className=' h-screen w-screen bg-[#7A4BC8] overflow-hidden'>
       <div className='flex flex-col items-center justify-center mt-[10vh]'>
@@ -9,8 +9,8 @@ function Questions({question,img,Yes,No}) {
       <h1 className='pt-[5vh] px-5 text-white text-2xl font-light'>{question}</h1>
       <img className='pt-[5vh]' src={img} alt="" />
         <div className='flex justify-between pt-[5vh] px-[9vw]'>
-          <button onClick={()=>{}} className={`${Yes ? "bg-red-300" : "bg-[#7A4BC8]" } px-8 py-3 rounded-full text-white text-2xl`}>Yes</button>
-          <button onClick={()=>{}} className={`${No ? "bg-red-300" : "bg-[#7A4BC8]" } px-8 py-3 rounded-full text-white text-2xl`}>No</button>
+          <button onClick={() => buttonColor("Yes")} className={`${Yes == true ? "bg-[#309b47] font-medium" : "bg-[#7A4BC8]" } px-8 py-3 rounded-full text-white font-medium text-2xl`}>Yes</button>
+          <button onClick={() => buttonColor("No")} className={`${No == true ? "bg-[#cd3b3b] font-medium" : "bg-[#7A4BC8]" } px-8 py-3 rounded-full text-white text-2xl`}>No</button>
         </div>
       </div>
       </div>

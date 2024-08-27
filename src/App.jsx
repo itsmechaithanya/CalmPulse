@@ -23,7 +23,31 @@ function App() {
     imgs: selfCareImage, 
     Yes:false,
     No:false,
-  }]);
+  }
+]);
+
+  // const buttonColor = () =>{
+  //   setQuestionData((prev)=>{
+  //     return prev.map((item, index)=>{
+  //           return {...item, 
+  //             Yes:!item.Yes,
+  //             No:!item.No
+  //           }
+	// 		})
+  //   })
+  // }
+
+  const buttonColor = (buttonType) => {
+    setQuestionData((prev) => {
+      return prev.map((item) => {
+        return {
+          ...item,
+          Yes: buttonType === "Yes" ? true : false,
+          No: buttonType === "No" ? true : false,
+        };
+      });
+    });
+  };
 
   return (
     <Router> 
@@ -43,7 +67,7 @@ function App() {
         <Route path="/questions" 
           element={
             questionData.map((items, index) => (
-              <Questions key={index} question={items.question} img={items.imgs} Yes={items.Yes} No={items.No} />
+              <Questions key={index} question={items.question} img={items.imgs} Yes={items.Yes} No={items.No} buttonColor={buttonColor} />
             ))
           }
         />
