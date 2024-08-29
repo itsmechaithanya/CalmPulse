@@ -26,17 +26,6 @@ function App() {
   }
 ]);
 
-  // const buttonColor = () =>{
-  //   setQuestionData((prev)=>{
-  //     return prev.map((item, index)=>{
-  //           return {...item, 
-  //             Yes:!item.Yes,
-  //             No:!item.No
-  //           }
-	// 		})
-  //   })
-  // }
-
   const buttonColor = (buttonType) => {
     setQuestionData((prev) => {
       return prev.map((item) => {
