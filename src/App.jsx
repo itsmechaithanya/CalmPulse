@@ -38,6 +38,24 @@ function App() {
     Yes:false,
     No:false,
     },
+    {
+    question: 'Have you seen any change in your self care or stopped doing it?', 
+    imgs: selfCareImage, 
+    Yes:false,
+    No:false,
+    },
+    {
+    question: 'Are you feeling difficulty in  talking to friends or family or do not feel like  to talk with anyone anymore?', 
+    imgs: sfd, 
+    Yes:false,
+    No:false,
+    },
+    {
+    question: 'Have you seen any change in your self care or stopped doing it?', 
+    imgs: selfCareImage, 
+    Yes:false,
+    No:false,
+    },
 ]);
 
   const buttonColor = (buttonType) => {
