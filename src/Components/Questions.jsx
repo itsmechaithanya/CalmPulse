@@ -15,7 +15,10 @@ function Questions({question,img,Yes,No,buttonColor}) {
       </div>
       </div>
       <div className=' flex pt-[2vh] pl-[5vw]'>
+      <Link to="/home">
         <button><i class=" border-4 border-black rounded-full text-5xl ri-arrow-left-line"></i></button>
+        </Link>
+       
       </div>
     </div>
   )
