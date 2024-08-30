@@ -25,12 +25,6 @@ function App() {
     Yes:false,
     No:false,
   }
-    {
-    question: 'Have you seen any change in your self care or stopped doing it?', 
-    imgs: selfCareImage, 
-    Yes:false,
-    No:false,
-  }
 ]);
 
   const buttonColor = (buttonType) => {
