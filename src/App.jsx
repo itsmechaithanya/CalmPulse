@@ -7,6 +7,7 @@ import Details from './Components/Details';
 import Home from './Components/Home';
 import Questions from './Components/Questions'
 import selfCareImage from './assets/iPhone 15/selfcare-removebg-preview 1.png';
+import sfd from './assets/iPhone 16/friends-removebg-preview 1.png'
 
 function App() {
   const [data, setData] = useState([{
@@ -24,7 +25,19 @@ function App() {
     imgs: selfCareImage, 
     Yes:false,
     No:false,
-  }
+    },
+    {
+    question: 'Are you feeling difficulty in  talking to friends or family or do not feel like  to talk with anyone anymore?', 
+    imgs: sfd, 
+    Yes:false,
+    No:false,
+    },
+    {
+    question: 'Have you seen any change in your self care or stopped doing it?', 
+    imgs: selfCareImage, 
+    Yes:false,
+    No:false,
+    },
 ]);
 
   const buttonColor = (buttonType) => {
