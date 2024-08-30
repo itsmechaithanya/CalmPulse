@@ -8,6 +8,9 @@ import Home from './Components/Home';
 import Questions from './Components/Questions'
 import selfCareImage from './assets/iPhone 15/selfcare-removebg-preview 1.png';
 import sfd from './assets/iPhone 16/friends-removebg-preview 1.png'
+import ygv from './assets/iPhone 17/file 2.png'
+import jhwf from './assets/iPhone 18/laughter-removebg-preview 1.png'
+import ihb from './assets/iPhone 20/irritated-removebg-preview 1.png'
 
 function App() {
   const [data, setData] = useState([{
@@ -21,38 +24,32 @@ function App() {
 
   const [questionData, setQuestionData] = useState([
     {
-    question: 'Have you seen any change in your self care or stopped doing it?', 
+    question: 'Have you seen any change in your self care or stopped doing it ?', 
     imgs: selfCareImage, 
     Yes:false,
     No:false,
     },
     {
-    question: 'Are you feeling difficulty in  talking to friends or family or do not feel like  to talk with anyone anymore?', 
+    question: 'Are you feeling difficulty in  talking to friends or family or do not feel like  to talk with anyone anymore ?', 
     imgs: sfd, 
     Yes:false,
     No:false,
     },
     {
-    question: 'Have you seen any change in your self care or stopped doing it?', 
-    imgs: selfCareImage, 
+    question: 'Are you encountering any decrease in your energy levels or  feeling lazy or feeling drained ?', 
+    imgs: ygv, 
     Yes:false,
     No:false,
     },
     {
-    question: 'Have you seen any change in your self care or stopped doing it?', 
-    imgs: selfCareImage, 
+    question: 'Do observe any increased sense of humor?', 
+    imgs: jhwf, 
     Yes:false,
     No:false,
     },
     {
-    question: 'Are you feeling difficulty in  talking to friends or family or do not feel like  to talk with anyone anymore?', 
-    imgs: sfd, 
-    Yes:false,
-    No:false,
-    },
-    {
-    question: 'Have you seen any change in your self care or stopped doing it?', 
-    imgs: selfCareImage, 
+    question: 'Are you getting annoyed or irritated easily or more often?', 
+    imgs: ihb, 
     Yes:false,
     No:false,
     },
