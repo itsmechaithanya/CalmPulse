@@ -19,6 +19,7 @@ import ihb from './assets/iPhone 20/irritated-removebg-preview 1.png';
 
 
 function App() {
+  
   const [data, setData] = useState([{
     name: 'Vaishnavi',
     date: '20/08/24',
