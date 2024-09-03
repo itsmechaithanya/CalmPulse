@@ -27,21 +27,17 @@ function LoginPage() {
         </div>
         <div className='flex justify-center mt-5 '>
           <Link to="/home">
-            <button className='bg-black text-white px-16 py-4 rounded-full shadow'>
-              Log In
-            </button>
+            <button className='bg-black text-white px-16 py-4 rounded-full shadow'>Log In</button>
           </Link>
         </div>
         <div className='flex justify-center mt-2 text-white'> 
         </div>
-        <div className='mt-20 ml-12'>
+        <div className='mt-20 ml-12 absolute z-10'>
             <h1 className='capitalize text-white mb-3'>
               Don't have an account?
             </h1>
             <Link to="/signup">
-              <button className='bg-black text-white px-10 py-5 ml-4 rounded-full shadow'>
-                Sign Up
-              </button>
+              <button className='bg-black text-white px-10 py-5 ml-4 rounded-full shadow'>Sign Up</button>
             </Link>
         </div>
         <img className='absolute bottom-0 right-0 h-[35vh]' src={imgggg} alt="" />   
