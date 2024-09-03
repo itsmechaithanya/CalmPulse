@@ -10,12 +10,29 @@ import Hometwo from './Components/Hometwo';
 import Homethree from './Components/Homethree';
 import Homefour from './Components/HomeFour';
 
-import selfCareImage from './assets/iPhone 15/selfcare-removebg-preview 1.png';
-import sfd from './assets/iPhone 16/friends-removebg-preview 1.png';
-import ygv from './assets/iPhone 17/file 2.png';
-import jhwf from './assets/iPhone 18/laughter-removebg-preview 1.png';
-import ihb from './assets/iPhone 20/irritated-removebg-preview 1.png';
+import c1q1 from './assets/Questionsone/selfcare-removebg-preview 1.png';
+import c1q2 from './assets/Questionsone/friends-removebg-preview 1.png';
+import c1q3 from './assets/Questionsone/file 2.png';
+import c1q4 from './assets/Questionsone/laughter-removebg-preview 1.png';
+import c1q5 from './assets/Questionsone/irritated-removebg-preview 1.png';
 
+import c2q1 from './assets/Questionstwo/sports-removebg-preview 1.png';
+import c2q2 from './assets/Questionstwo/alcohol-removebg-preview 1.png';
+import c2q3 from './assets/Questionstwo/money-removebg-preview 1.png';
+import c2q4 from './assets/Questionstwo/parent_time_1_-removebg-preview 1.png';
+import c2q5 from './assets/Questionstwo/health_issues-removebg-preview 1.png';
+
+import c3q1 from './assets/Questionsthree/studylife-removebg-preview 1.png';
+import c3q2 from './assets/Questionsthree/b5d577c99973586884890e1dfa1a3469-removebg-preview 1.png';
+import c3q3 from './assets/Questionsthree/class_students-removebg-preview 1.png';
+import c3q4 from './assets/Questionsthree/goals-removebg-preview 1.png';
+import c3q5 from './assets/Questionsthree/Assignments-removebg-preview 1.png';
+
+import c4q1 from './assets/Questionsfour/calm-removebg-preview 1.png';
+import c4q2 from './assets/Questionsfour/extreme_incident-removebg-preview 1.png';
+import c4q3 from './assets/Questionsfour/heartbeat-removebg-preview 1.png';
+import c4q4 from './assets/Questionsfour/weight_loss-removebg-preview 1.png';
+import c4q5 from './assets/Questionsfour/Harrassment-removebg-preview 1.png';
 
 function App() {
 
@@ -29,32 +46,32 @@ function App() {
   }]);
 
   const QuestionsOne = [
-    { question: 'Have you seen any change in your self care or stopped doing it?', imgs: selfCareImage, Yes: false, No: false },
-    { question: 'Are you feeling difficulty in talking to friends or family or do not feel like to talk with anyone anymore?', imgs: sfd, Yes: false, No: false },
-    { question: 'Are you encountering any decrease in your energy levels or feeling lazy or feeling drained?', imgs: ygv, Yes: false, No: false },
-    { question: 'Do you observe any increased sense of humor?', imgs: jhwf, Yes: false, No: false },
-    { question: 'Are you getting annoyed or irritated easily or more often?', imgs: ihb, Yes: false, No: false },
+    { question: 'Have you seen any change in your self care or stopped doing it?', imgs: c1q1, Yes: false, No: false },
+    { question: 'Are you feeling difficulty in talking to friends or family or do not feel like to talk with anyone anymore?', imgs: c1q2, Yes: false, No: false },
+    { question: 'Are you encountering any decrease in your energy levels or feeling lazy or feeling drained?', imgs: c1q3, Yes: false, No: false },
+    { question: 'Do you observe any increased sense of humor?', imgs: c1q4, Yes: false, No: false },
+    { question: 'Are you getting annoyed or irritated easily or more often?', imgs: c1q5, Yes: false, No: false },
   ];
   const Questionstwo = [
-    { question: 'Do you play sports often ?', imgs: selfCareImage, Yes: false, No: false },
-    { question: 'Did you start using tobacco, Alcohol, drugs in recent days?', imgs: sfd, Yes: false, No: false },
-    { question: 'Do you get enough pocket money?', imgs: ygv, Yes: false, No: false },
-    { question: 'Do your parents allow time for you?', imgs: jhwf, Yes: false, No: false },
-    { question: 'Are any health issues brothering you?', imgs: ihb, Yes: false, No: false },
+    { question: 'Do you play sports often ?', imgs: c2q1, Yes: false, No: false },
+    { question: 'Did you start using tobacco, Alcohol, drugs in recent days?', imgs: c2q2, Yes: false, No: false },
+    { question: 'Do you get enough pocket money?', imgs: c2q3, Yes: false, No: false },
+    { question: 'Do your parents allow time for you?', imgs: c2q4, Yes: false, No: false },
+    { question: 'Are any health issues brothering you?', imgs: c2q5, Yes: false, No: false },
   ];
   const Questionsthree = [
-    { question: 'How is your study life going on ?', imgs: selfCareImage, Yes: false, No: false },
-    { question: 'Are you comfortable with campus social life?', imgs: sfd, Yes: false, No: false },
-    { question: 'Do you attend classes regularly?', imgs: ygv, Yes: false, No: false },
-    { question: 'Do get satisfied with your goals and results ?', imgs: jhwf, Yes: false, No: false },
-    { question: 'Do you wait till end or peak time to complete your assignments or tasks given?', imgs: ihb, Yes: false, No: false },
+    { question: 'How is your study life going on ?', imgs: c3q1, Yes: false, No: false },
+    { question: 'Are you comfortable with campus social life?', imgs: c3q2, Yes: false, No: false },
+    { question: 'Do you attend classes regularly?', imgs: c3q3, Yes: false, No: false },
+    { question: 'Do get satisfied with your goals and results ?', imgs: c3q4, Yes: false, No: false },
+    { question: 'Do you wait till end or peak time to complete your assignments or tasks given?', imgs: c3q5, Yes: false, No: false },
   ];
   const Questionsfour = [
-    { question: 'Did you try any personal methods to calm yourself ?', imgs: selfCareImage, Yes: false, No: false },
-    { question: 'Did have or met with an accident(can be anything) recently and  nervous about safety or the surrounding environment.', imgs: sfd, Yes: false, No: false },
-    { question: 'Did you notice any change like  increased heartrate and respirations, increased blood pressure?', imgs: ygv, Yes: false, No: false },
-    { question: 'Have seen any sudden increase or loss in your weight?', imgs: jhwf, Yes: false, No: false },
-    { question: 'Did you see a change in your self like avoidance of activities or places that trigger memories ?', imgs: ihb, Yes: false, No: false },
+    { question: 'Did you try any personal methods to calm yourself ?', imgs: c4q1, Yes: false, No: false },
+    { question: 'Did have or met with an accident(can be anything) recently and  nervous about safety or the surrounding environment.', imgs: c4q2, Yes: false, No: false },
+    { question: 'Did you notice any change like  increased heartrate and respirations, increased blood pressure?', imgs: c4q3, Yes: false, No: false },
+    { question: 'Have seen any sudden increase or loss in your weight?', imgs: c4q4, Yes: false, No: false },
+    { question: 'Did you see a change in your self like avoidance of activities or places that trigger memories ?', imgs: c4q5, Yes: false, No: false },
   ];
 
   const [questionData, setQuestionData] = useState(QuestionsOne);
