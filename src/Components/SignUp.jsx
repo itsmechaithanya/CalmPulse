@@ -29,17 +29,13 @@ function SignUp() {
         </div>
         <div className='flex justify-end mt-5 mr-20 '>
           <Link to="/Details">
-            <button className='bg-black text-white px-8 py-5 rounded-full shadow'>Create Account</button>
+            <button className='bg-black text-white px-8 py-5 rounded-full shadow absolute right-10 mt-8 z-10 '>Create Account</button>
           </Link>
         </div>
-        <div className='flex justify-end mt-10 mr-5 text-white'> 
-          <h1 className='capitalize'>
-            Already have an account?
-          </h1>
-        </div>
-        <div className='flex justify-end mt-2 mr-5'>
+        <div className='absolute right-2 bottom-5 z-10'>
           <Link to="/login">
-            <button className='bg-black text-white px-16 py-5 rounded-full shadow'>Log In</button>
+            <h1 className='text-white capitalize mb-3'>Already have an account?</h1>
+            <button className='ml-5 bg-black text-white px-16 py-5 rounded-full shadow '>Log In</button>
           </Link>
         </div>
         <img className='absolute -bottom-[30vh] -left-[11vh] h-[60vh]' src={imgg} alt="" />
