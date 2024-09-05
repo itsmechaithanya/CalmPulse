@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Landing from './Components/Landing';
 import SignUp from './Components/SignUp';
 import LoginPage from './Components/LoginPage';
@@ -35,7 +35,6 @@ import c4q4 from './assets/Questionsfour/weight_loss-removebg-preview 1.png';
 import c4q5 from './assets/Questionsfour/Harrassment-removebg-preview 1.png';
 
 function App() {
-
   const [data, setData] = useState([{
     name: 'Vaishnavi',
     date: '20/08/24',
@@ -52,45 +51,30 @@ function App() {
     { question: 'Do you observe any increased sense of humor?', imgs: c1q4, Yes: false, No: false },
     { question: 'Are you getting annoyed or irritated easily or more often?', imgs: c1q5, Yes: false, No: false },
   ];
+
   const Questionstwo = [
-    { question: 'Do you play sports often ?', imgs: c2q1, Yes: false, No: false },
-    { question: 'Did you start using tobacco, Alcohol, drugs in recent days?', imgs: c2q2, Yes: false, No: false },
+    { question: 'Do you play sports often?', imgs: c2q1, Yes: false, No: false },
+    { question: 'Did you start using tobacco, alcohol, or drugs recently?', imgs: c2q2, Yes: false, No: false },
     { question: 'Do you get enough pocket money?', imgs: c2q3, Yes: false, No: false },
     { question: 'Do your parents allow time for you?', imgs: c2q4, Yes: false, No: false },
-    { question: 'Are any health issues brothering you?', imgs: c2q5, Yes: false, No: false },
+    { question: 'Are any health issues bothering you?', imgs: c2q5, Yes: false, No: false },
   ];
+
   const Questionsthree = [
-    { question: 'How is your study life going on ?', imgs: c3q1, Yes: false, No: false },
+    { question: 'How is your study life going?', imgs: c3q1, Yes: false, No: false },
     { question: 'Are you comfortable with campus social life?', imgs: c3q2, Yes: false, No: false },
     { question: 'Do you attend classes regularly?', imgs: c3q3, Yes: false, No: false },
-    { question: 'Do get satisfied with your goals and results ?', imgs: c3q4, Yes: false, No: false },
-    { question: 'Do you wait till end or peak time to complete your assignments or tasks given?', imgs: c3q5, Yes: false, No: false },
+    { question: 'Do you get satisfied with your goals and results?', imgs: c3q4, Yes: false, No: false },
+    { question: 'Do you wait until the last minute to complete your assignments?', imgs: c3q5, Yes: false, No: false },
   ];
+
   const Questionsfour = [
-    { question: 'Did you try any personal methods to calm yourself ?', imgs: c4q1, Yes: false, No: false },
-    { question: 'Did have or met with an accident(can be anything) recently and  nervous about safety or the surrounding environment.', imgs: c4q2, Yes: false, No: false },
-    { question: 'Did you notice any change like  increased heartrate and respirations, increased blood pressure?', imgs: c4q3, Yes: false, No: false },
-    { question: 'Have seen any sudden increase or loss in your weight?', imgs: c4q4, Yes: false, No: false },
-    { question: 'Did you see a change in your self like avoidance of activities or places that trigger memories ?', imgs: c4q5, Yes: false, No: false },
+    { question: 'Have you tried any personal methods to calm yourself?', imgs: c4q1, Yes: false, No: false },
+    { question: 'Have you experienced a recent incident that made you nervous about safety?', imgs: c4q2, Yes: false, No: false },
+    { question: 'Have you noticed increased heart rate, respiration, or blood pressure?', imgs: c4q3, Yes: false, No: false },
+    { question: 'Have you seen any sudden weight change?', imgs: c4q4, Yes: false, No: false },
+    { question: 'Have you started avoiding activities or places that trigger memories?', imgs: c4q5, Yes: false, No: false },
   ];
-
-  const [questionData, setQuestionData] = useState(QuestionsOne);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
-  const handleQuestion = (index, answer) => {
-    setQuestionData(prev => 
-      prev.map((item, i) => 
-        i === index 
-        ? { ...item, Yes: answer === 'Yes' ? !item.Yes : false, No: answer === 'No' ? !item.No : false }
-        : item
-      )
-    );
-    setCurrentQuestionIndex(prev => prev + 1); 
-  };
-
-  const goToPreviousQuestion = () => {
-    setCurrentQuestionIndex(prev => Math.max(prev - 1, 0)); 
-  };
 
   return (
     <Router>
@@ -99,36 +83,69 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/details" element={<Details />} />
-        <Route 
-          path="/home" 
-          element={<Home name={data[0].name} />} 
-        />
-        <Route
-          path="/questions"
-          element={
-            currentQuestionIndex < questionData.length ? (
-              <Questions
-                index={currentQuestionIndex}
-                question={questionData[currentQuestionIndex].question}
-                img={questionData[currentQuestionIndex].imgs}
-                Yes={questionData[currentQuestionIndex].Yes}
-                No={questionData[currentQuestionIndex].No}
-                handleQuestion={handleQuestion}
-                goToPreviousQuestion={goToPreviousQuestion}
-                canGoBack={currentQuestionIndex > 0}
-              />
-            ) : (
-              <div className="h-screen w-screen flex items-center justify-center bg-[#7A4BC8] text-white text-2xl">
-                No more questions.
-              </div>
-            )
-          }
-        />
-        <Route path="/hometwo" element={<Hometwo />}/>
-        <Route path="/homethree" element={<Homethree/>}/>
-        <Route path="/homefour" element={<Homefour/>}/>
+        <Route path="/home" element={<Home name={data[0].name} />} />
+        <Route path="/hometwo" element={<Hometwo />} />
+        <Route path="/homethree" element={<Homethree />} />
+        <Route path="/homefour" element={<Homefour />} />
+
+        {/* Route for the questions component */}
+        <Route path="/questions" element={<QuestionsWrapper
+          QuestionsOne={QuestionsOne}
+          Questionstwo={Questionstwo}
+          Questionsthree={Questionsthree}
+          Questionsfour={Questionsfour}
+        />} />
       </Routes>
     </Router>
+  );
+}
+
+
+function QuestionsWrapper({ QuestionsOne, Questionstwo, Questionsthree, Questionsfour }) {
+  const location = useLocation();
+  const { questionSet } = location.state || { questionSet: QuestionsOne }; // Default to QuestionsOne if no state is passed
+
+  const [questionData, setQuestionData] = useState(() => {
+    // Ensure the right question set is selected based on passed state
+    if (questionSet === 'QuestionsOne') return QuestionsOne;
+    if (questionSet === 'Questionstwo') return Questionstwo;
+    if (questionSet === 'Questionsthree') return Questionsthree;
+    if (questionSet === 'Questionsfour') return Questionsfour;
+    return QuestionsOne; // Fallback to QuestionsOne
+  });
+  
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const handleQuestion = (index, answer) => {
+    setQuestionData(prev =>
+      prev.map((item, i) =>
+        i === index
+          ? { ...item, Yes: answer === 'Yes' ? !item.Yes : false, No: answer === 'No' ? !item.No : false }
+          : item
+      )
+    );
+    setCurrentQuestionIndex(prev => prev + 1);
+  };
+
+  const goToPreviousQuestion = () => {
+    setCurrentQuestionIndex(prev => Math.max(prev - 1, 0));
+  };
+
+  return currentQuestionIndex < questionData.length ? (
+    <Questions
+      index={currentQuestionIndex}
+      question={questionData[currentQuestionIndex].question}
+      img={questionData[currentQuestionIndex].imgs}
+      Yes={questionData[currentQuestionIndex].Yes}
+      No={questionData[currentQuestionIndex].No}
+      handleQuestion={handleQuestion}
+      goToPreviousQuestion={goToPreviousQuestion}
+      canGoBack={currentQuestionIndex > 0}
+    />
+  ) : (
+    <div className="h-screen w-screen flex items-center justify-center bg-[#7A4BC8] text-white text-2xl">
+      No more questions.
+    </div>
   );
 }
 
