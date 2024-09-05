@@ -88,7 +88,6 @@ function App() {
         <Route path="/homethree" element={<Homethree />} />
         <Route path="/homefour" element={<Homefour />} />
 
-        {/* Route for the questions component */}
         <Route path="/questions" element={<QuestionsWrapper
           QuestionsOne={QuestionsOne}
           Questionstwo={Questionstwo}
@@ -103,15 +102,15 @@ function App() {
 
 function QuestionsWrapper({ QuestionsOne, Questionstwo, Questionsthree, Questionsfour }) {
   const location = useLocation();
-  const { questionSet } = location.state || { questionSet: QuestionsOne }; // Default to QuestionsOne if no state is passed
+  const { questionSet } = location.state || { questionSet: QuestionsOne };
 
   const [questionData, setQuestionData] = useState(() => {
-    // Ensure the right question set is selected based on passed state
+
     if (questionSet === 'QuestionsOne') return QuestionsOne;
     if (questionSet === 'Questionstwo') return Questionstwo;
     if (questionSet === 'Questionsthree') return Questionsthree;
     if (questionSet === 'Questionsfour') return Questionsfour;
-    return QuestionsOne; // Fallback to QuestionsOne
+    return QuestionsOne; 
   });
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);

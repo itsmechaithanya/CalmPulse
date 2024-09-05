@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import bgg from '../assets/c3-removebg-preview-2 1.png';
 
 function Homethree() {
-  const questionSet = 'Questionsthree'; // Set to the specific question set
+  const questionSet = 'Questionsthree';
 
   return (
     <div className='h-screen w-screen bg-[#7A4BC8]'>

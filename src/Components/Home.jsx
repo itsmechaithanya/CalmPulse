@@ -4,7 +4,7 @@ import 'remixicon/fonts/remixicon.css';
 import white from '../assets/iPhone 14/c1-removebg-preview 1.png';
 
 function Home({ name }) { 
-  const questionSet = 'QuestionsOne'; // Set to the specific question set
+  const questionSet = 'QuestionsOne';
 
   return (
     <div className='h-screen w-screen bg-[#7A4BC8]'>
