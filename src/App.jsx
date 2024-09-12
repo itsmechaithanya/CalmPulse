@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
 import Landing from './Components/Landing';
 import SignUp from './Components/SignUp';
 import LoginPage from './Components/LoginPage';
@@ -78,6 +80,7 @@ function App() {
 
   return (
     <Router>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<SignUp />} />
@@ -87,7 +90,6 @@ function App() {
         <Route path="/hometwo" element={<Hometwo />} />
         <Route path="/homethree" element={<Homethree />} />
         <Route path="/homefour" element={<Homefour />} />
-
         <Route path="/questions" element={<QuestionsWrapper
           QuestionsOne={QuestionsOne}
           Questionstwo={Questionstwo}
@@ -99,20 +101,18 @@ function App() {
   );
 }
 
-
 function QuestionsWrapper({ QuestionsOne, Questionstwo, Questionsthree, Questionsfour }) {
   const location = useLocation();
-  const { questionSet } = location.state || { questionSet: QuestionsOne };
+  const { questionSet } = location.state || { questionSet: 'QuestionsOne' };
 
   const [questionData, setQuestionData] = useState(() => {
-
     if (questionSet === 'QuestionsOne') return QuestionsOne;
     if (questionSet === 'Questionstwo') return Questionstwo;
     if (questionSet === 'Questionsthree') return Questionsthree;
     if (questionSet === 'Questionsfour') return Questionsfour;
-    return QuestionsOne; 
+    return QuestionsOne;
   });
-  
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const handleQuestion = (index, answer) => {
