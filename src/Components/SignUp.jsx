@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import imgg from '../assets/b08f403ff43bbe883c702ab13eccb016.png';
 import imggg from '../assets/247ade28c862c6b10881b9307e6df568.png';
 import { FcGoogle } from "react-icons/fc";
 import { auth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, db } from './firebase';
 import { setDoc, doc } from "firebase/firestore";
+import { toast } from 'react-toastify'; // Assuming you're using toast for success messages
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ function SignUp() {
   const [name, setName] = useState("");
   const [phoneNumber, setPhone] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate(); // Use navigate to redirect
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -31,17 +34,17 @@ function SignUp() {
         });
 
         console.log("User registered successfully with Firestore:", { name, phoneNumber, email });
-        toast.success("User Registered Successfully!!",{
-          position: "top-center",
-        });
+
+        // Redirect to login page after successful registration
+        navigate('/login');
       }
 
     } catch (error) {
       setError(error.message);
       console.log("Registration Error: ", error.message);
-      toast.success(error.message,{
+      toast.error(error.message, {
         position: "bottom-center"
-      })
+      });
     }
   };
 
@@ -58,63 +61,63 @@ function SignUp() {
   };
 
   return (
-    <div className='h-screen w-screen bg-[#7A4BC8] overflow-hidden relative'>
-      <img className='h-[20vh] absolute -top-[5vh] -right-2' src={imggg} alt="" />
-      <h1 className='text-white text-3xl font-semibold flex justify-center pt-[10vh]'>Sign Up</h1>
-      <div className='flex flex-col justify-center mt-[3vh] items-center'>
-        <button onClick={handleGoogleSignUp} className='text-white bg-black px-8 flex justify-center items-center py-5 rounded-full gap-3 shadow'>
-          <FcGoogle size={"1.5em"} />Sign up with Google
+    <div className='h-[100vh] w-[100vw] bg-[#7A4BC8] overflow-hidden relative'>
+      <img className='h-[20vh] absolute -top-[5vh] -right-[1vh]' src={imggg} alt="" />
+      <h1 className='text-white text-[4vh] font-semibold flex justify-center pt-[5vh]'>Sign Up</h1>
+      <div className='flex flex-col justify-center mt-[2vh] items-center'>
+        <button onClick={handleGoogleSignUp} className='text-white bg-black px-[4vh] flex justify-center items-center py-[2.5vh] rounded-[5vh] gap-[1.5vh] shadow'>
+          <FcGoogle size={"4vh"} />Sign up with Google
         </button>
       </div>
-      <div className='flex justify-center mt-2'>
-        <h1 className=' capitalize'>Or continue with Email</h1>
+      <div className='flex justify-center mt-[1vh]'>
+        <h1 className='capitalize text-[2vh]'>Or continue with Email</h1>
       </div>
-      <div className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10'>
+      <div className='flex flex-col gap-[2vh] mx-[2.5vh] justify-center mt-[3vh]'>
         <input
-          className='py-4 px-7 rounded-full'
+          className='py-[2vh] px-[3.5vh] rounded-[5vh] text-[2vh]'
           type="text"
           placeholder='Enter Your Name'
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <input
-          className='py-4 px-7 rounded-full'
+          className='py-[2vh] px-[3.5vh] rounded-[5vh] text-[2vh]'
           type="text"
           placeholder='Enter Your Phone number'
           value={phoneNumber}
           onChange={(e) => setPhone(e.target.value)}
         />
         <input
-          className='py-4 px-7 rounded-full'
+          className='py-[2vh] px-[3.5vh] rounded-[5vh] text-[2vh]'
           type="email"
           placeholder='Enter Your Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          className='py-4 px-7 rounded-full'
+          className='py-[2vh] px-[3.5vh] rounded-[5vh] text-[2vh]'
           type="password"
           placeholder='Enter Your Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <div className='flex items-center px-3 mt-5'>
-        <input className='h-5 w-5 ml-4 mr-5 bg-red-900 shadow' type="checkbox" />
-        <h1 className='text-white capitalize'>I agree with the Terms of Service and Privacy policy</h1>
+      <div className='flex items-center px-[1.5vh] mt-[2vh]'>
+        <input className='h-[2.5vh] w-[2.5vh] ml-[2vh] mr-[2.5vh] bg-red-900 shadow' type="checkbox" />
+        <h1 className='text-white capitalize text-[1.8vh]'>I agree with the Terms of Service and Privacy policy</h1>
       </div>
-      <div className='flex justify-end mt-5 mr-20 '>
-        <button onClick={handleRegister} className='bg-black text-white px-8 py-5 rounded-full shadow absolute right-10 mt-8 z-10'>
+      <div className='flex justify-end mt-[2vh] mr-[10vh]'>
+        <button onClick={handleRegister} className='bg-black text-white px-[4vh] py-[2.5vh] rounded-[5vh] shadow absolute right-[2vh] mt-[-1.5vh] z-10 text-[2vh]'>
           Create Account
         </button>
       </div>
-      <div className='absolute right-2 bottom-5 z-10'>
+      <div className='absolute right-[1vh] bottom-[5vh] z-10'>
         <Link to="/login">
-          <h1 className='text-white capitalize mb-3'>Already have an account?</h1>
-          <button className='ml-5 bg-black text-white px-16 py-5 rounded-full shadow'>Log In</button>
+          <h1 className='text-white capitalize mb-[-5.5vh] text-[2vh]'>Already have an account?</h1>
+          <button className='ml-[3vh] mt-[6vh] bg-black text-white px-[8vh] py-[2.5vh] rounded-[5vh] shadow text-[2vh]'>Log In</button>
         </Link>
       </div>
-      <img className='absolute -bottom-[30vh] -left-[11vh] h-[60vh]' src={imgg} alt="" />
+      <img className='absolute -bottom-[10vh] -left-[9.5vh] h-[37vh]' src={imgg} alt="" />
     </div>
   );
 }

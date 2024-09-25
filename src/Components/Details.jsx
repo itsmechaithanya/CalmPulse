@@ -40,14 +40,14 @@ function Details() {
   };
 
   return (
-    <div className='h-screen w-screen bg-[#7A4BC8]'>
-        <img className='h-[20vh] absolute -top-[5vh] -right-2' src={imggg} alt="" />
-        <div className='flex justify-center pt-[10vh]'>
+    <div className='h-[100vh] w-[100vw] bg-[#7A4BC8]'>
+        <img className='h-[20vh] absolute -top-[5vh] -right-[0.5vw]' src={imggg} alt="" />
+        <div className='flex justify-center pt-[15vh]'> {/* Increased padding-top */}
             <h1 className='text-white text-[3vh] font-semibold'>Users Details Form</h1>
         </div>
-        <form className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10' onSubmit={handleSubmit}>
+        <form className='flex flex-col gap-[2vh] mx-[5vw] justify-center mt-[3vh]' onSubmit={handleSubmit}> {/* Decreased margin-top */}
             <input 
-              className='py-4 px-7 rounded-full' 
+              className='py-[2vh] px-[3vw] rounded-[5vh]' 
               type="text" 
               placeholder='Username' 
               value={username}
@@ -55,15 +55,15 @@ function Details() {
               required 
             />
             <input 
-              className='py-4 px-7 rounded-full text-[#9CA3AF] uppercase' 
+              className='py-[2vh] px-[3vw] rounded-[5vh] text-[#9CA3AF] uppercase' 
               type="date" 
               placeholder='Date' 
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required 
             />
-            <div className='flex justify-evenly bg-white rounded-full'>
-                <h1 className='text-md text-[#9CA3AF] py-4 px-7'>
+            <div className='flex justify-evenly bg-white rounded-[5vh]'>
+                <h1 className='text-[2vh] text-[#9CA3AF] py-[2vh] px-[3vw]'>
                     <input 
                       name='Gender' 
                       type="radio" 
@@ -72,7 +72,7 @@ function Details() {
                       required 
                     /> Male
                 </h1>
-                <h1 className='text-md text-[#9CA3AF] py-4 px-7'>
+                <h1 className='text-[2vh] text-[#9CA3AF] py-[2vh] px-[3vw]'>
                     <input 
                       name='Gender' 
                       type="radio" 
@@ -83,7 +83,7 @@ function Details() {
                 </h1>
             </div>
             <input 
-              className='py-4 px-7 rounded-full' 
+              className='py-[2vh] px-[3vw] rounded-[5vh]' 
               type="number" 
               placeholder='Phone Number' 
               value={phoneNumber}
@@ -91,7 +91,7 @@ function Details() {
               required 
             />
             <input 
-              className='py-4 px-7 rounded-full' 
+              className='py-[2vh] px-[3vw] rounded-[5vh]' 
               type="email" 
               placeholder='Email' 
               value={email}
@@ -99,14 +99,14 @@ function Details() {
               required 
             />
             <input 
-              className='py-4 px-7 rounded-full' 
+              className='py-[2vh] px-[3vw] rounded-[5vh]' 
               type="password" 
               placeholder='Password' 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required 
             />
-            <button className='bg-black text-white px-10 py-5 mt-20 rounded-full shadow' type="submit">Submit</button>
+            <button className='bg-black text-white px-[5vw] py-[2.5vh] mt-[6vh] rounded-[5vh] shadow' type="submit">Submit</button>
         </form>
     </div>
   );

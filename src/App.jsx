@@ -192,9 +192,9 @@ function QuestionsWrapper({ QuestionsOne, Questionstwo, Questionsthree, Question
       canGoBack={currentQuestionIndex > 0}
     />
   ) : (
-    <div className="h-screen w-screen flex items-center justify-center bg-[#7A4BC8] text-white text-2xl">
+    <div className="h-[100vh] w-[100vw] flex items-center justify-center bg-[#7A4BC8] text-white text-[3vh]">
       <Link to='/hometwo'>
-      <button className='bg-black text-white px-20 py-4 text-xl rounded-2xl absolute top-[62%] left-[23%]'> Go to Cluster-2 </button>
+      <button className='bg-black text-white px-[10vh] py-[2vh] text-[2.5vh] rounded-[3vh] absolute top-[65%] left-[25%]'> Go to Cluster-2 </button>
       </Link>
     </div>
   );

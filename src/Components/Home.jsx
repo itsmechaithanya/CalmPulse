@@ -8,14 +8,14 @@ import { doc, getDoc } from "firebase/firestore";
 function Home() {
   const location = useLocation();
   const [name, setName] = useState("");  // State to hold the username
-  const userId = location.state?.userId; // Retrieve userId (email) passed from Details page
+  const userEmail = location.state?.email; // Retrieve the email passed from the login page
 
   // Fetch user details from Firestore
   useEffect(() => {
     const fetchUserDetails = async () => {
-      if (userId) {
+      if (userEmail) {
         try {
-          const userDoc = await getDoc(doc(db, "details", userId));
+          const userDoc = await getDoc(doc(db, "details", userEmail)); // Fetch user details by email
           if (userDoc.exists()) {
             const userData = userDoc.data();
             setName(userData.username);  // Set the username from Firestore
@@ -26,30 +26,30 @@ function Home() {
           console.error("Error fetching user details: ", error);
         }
       } else {
-        console.error("No userId provided!");
+        console.error("No userEmail provided!");
       }
     };
 
     fetchUserDetails();
-  }, [userId]);
+  }, [userEmail]);
 
   return (
-    <div className='h-screen w-screen bg-[#7A4BC8]'>
-      <h1 className='text-2xl font-semibold pt-[6vh] pl-[4vh]'>
-        Welcome, {name ? name : "Guest"} <i className="ri-shake-hands-fill text-[#fce3c7]"></i>
+    <div className='h-[100vh] w-[100vw] bg-[#7A4BC8]'>
+      <h1 className='text-[3vh] font-semibold pt-[6vh] pl-[4vw]'>
+        Welcome, {name ? name : "username"} <i className="ri-shake-hands-fill text-[#fce3c7]"></i>
       </h1>
-      <h1 className='text-white flex justify-center text-center mt-10 font-light text-2xl px-3'>
+      <h1 className='text-white flex justify-center text-center mt-[5vh] font-light text-[3vh] px-[2vw]'>
         Let's get to know about your feelings
       </h1>
       <div className='flex justify-center'>
-        <img src={white} alt="Decorative" />
+        <img src={white} alt="Decorative" className='h-[40vh]' />
       </div>
-      <h1 className='text-white flex justify-center text-center mt-20 font-light text-2xl capitalize px-3'>
+      <h1 className='text-white flex justify-center text-center mt-[5vh] font-light text-[3vh] capitalize px-[2vw]'>
         You will have to answer a few questions
       </h1>
       <div className='h-[20vh] flex justify-center items-center'>
         <Link to="/questions" state={{ questionSet: 'QuestionsOne' }}> 
-          <button className='bg-white text-xl px-20 py-4 rounded-full'>
+          <button className='bg-white text-[2.5vh] px-[10vw] py-[2vh] rounded-[5vh]'>
             Ready
           </button>
         </Link>
