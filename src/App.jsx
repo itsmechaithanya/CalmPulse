@@ -12,29 +12,55 @@ import Hometwo from './Components/Hometwo';
 import Homethree from './Components/Homethree';
 import Homefour from './Components/HomeFour';
 
+import { Link } from 'react-router-dom';
+
 import c1q1 from './assets/Questionsone/selfcare-removebg-preview 1.png';
 import c1q2 from './assets/Questionsone/friends-removebg-preview 1.png';
 import c1q3 from './assets/Questionsone/file 2.png';
 import c1q4 from './assets/Questionsone/laughter-removebg-preview 1.png';
 import c1q5 from './assets/Questionsone/irritated-removebg-preview 1.png';
+import c1q6 from './assets/Questionsone/C1Q6-removebg-preview.png';
+import c1q7 from './assets/Questionsone/C1Q7-removebg-preview.png';
+import c1q8 from './assets/Questionsone/C1Q8-removebg-preview.png';
+import c1q9 from './assets/Questionsone/C1Q9-removebg-preview.png';
+import c1q10 from './assets/Questionsone/C1Q10-removebg-preview.png';
+import c1q11 from './assets/Questionsone/C1Q11-removebg-preview.png';
+import c1q12 from './assets/Questionsone/C1Q12-removebg-preview.png';
+import c1q13 from './assets/Questionsone/C1Q13-removebg-preview.png';
 
 import c2q1 from './assets/Questionstwo/sports-removebg-preview 1.png';
 import c2q2 from './assets/Questionstwo/alcohol-removebg-preview 1.png';
 import c2q3 from './assets/Questionstwo/money-removebg-preview 1.png';
 import c2q4 from './assets/Questionstwo/parent_time_1_-removebg-preview 1.png';
 import c2q5 from './assets/Questionstwo/health_issues-removebg-preview 1.png';
+import c2q6 from './assets/Questionstwo/C2Q6-removebg-preview.png';
+import c2q7 from './assets/Questionstwo/C2Q7-removebg-preview.png';
+import c2q8 from './assets/Questionstwo/C2Q8-removebg-preview.png';
+import c2q9 from './assets/Questionstwo/C2Q9-removebg-preview.png';
+import c2q10 from './assets/Questionstwo/C2Q10-removebg-preview.png';
+import c2q11 from './assets/Questionstwo/C2Q11-removebg-preview.png';
+
 
 import c3q1 from './assets/Questionsthree/studylife-removebg-preview 1.png';
 import c3q2 from './assets/Questionsthree/b5d577c99973586884890e1dfa1a3469-removebg-preview 1.png';
 import c3q3 from './assets/Questionsthree/class_students-removebg-preview 1.png';
 import c3q4 from './assets/Questionsthree/goals-removebg-preview 1.png';
 import c3q5 from './assets/Questionsthree/Assignments-removebg-preview 1.png';
+import c3q6 from './assets/Questionsthree/C3Q6-removebg-preview.png';
+import c3q7 from './assets/Questionsthree/C3Q7-removebg-preview.png';
+import c3q8 from './assets/Questionsthree/C3Q8-removebg-preview.png';
+import c3q9 from './assets/Questionsthree/C3Q9-removebg-preview.png';
+import c3q10 from './assets/Questionsthree/C3Q10-removebg-preview.png';
 
 import c4q1 from './assets/Questionsfour/calm-removebg-preview 1.png';
 import c4q2 from './assets/Questionsfour/extreme_incident-removebg-preview 1.png';
 import c4q3 from './assets/Questionsfour/heartbeat-removebg-preview 1.png';
 import c4q4 from './assets/Questionsfour/weight_loss-removebg-preview 1.png';
 import c4q5 from './assets/Questionsfour/Harrassment-removebg-preview 1.png';
+import c4q6 from './assets/Questionsfour/C4Q6-removebg-preview.png';
+import c4q7 from './assets/Questionsfour/C4Q7-removebg-preview.png';
+import c4q8 from './assets/Questionsfour/C4Q8-removebg-preview.png';
+import c4q9 from './assets/Questionsfour/C4Q9-removebg-preview.png';
 
 function App() {
   const [data, setData] = useState([{
@@ -52,6 +78,14 @@ function App() {
     { question: 'Are you encountering any decrease in your energy levels or feeling lazy or feeling drained?', imgs: c1q3, Yes: false, No: false },
     { question: 'Do you observe any increased sense of humor?', imgs: c1q4, Yes: false, No: false },
     { question: 'Are you getting annoyed or irritated easily or more often?', imgs: c1q5, Yes: false, No: false },
+    { question: 'Are you unable to rest, relax, or let go things?', imgs: c1q6, Yes: false, No: false},
+    { question: 'Do you observe any changes like over eating, over sleeping?', imgs: c1q7, Yes: false, No: false},
+    { question: 'Do you observe any changes like poor appetite, less sleeping?', imgs: c1q8, Yes: false, No: false},
+    { question: 'Did you cry more often these days?', imgs: c1q9, Yes: false, No: false},
+    { question: 'Are able to find some personal time for self care, watching something you like?', imgs: c1q10, Yes: false, No: false},
+    { question: 'Did you notice any memory problems/forgetfulness recently ?', imgs: c1q11, Yes: false, No: false},
+    { question: 'Do you face any difficulty setting priorities or making decisions?', imgs: c1q12, Yes: false, No: false},
+    { question: 'Did you notice anything like impatient with your fellow mates or disrespectful to others?', imgs: c1q13, Yes: false, No: false},
   ];
 
   const Questionstwo = [
@@ -60,6 +94,12 @@ function App() {
     { question: 'Do you get enough pocket money?', imgs: c2q3, Yes: false, No: false },
     { question: 'Do your parents allow time for you?', imgs: c2q4, Yes: false, No: false },
     { question: 'Are any health issues bothering you?', imgs: c2q5, Yes: false, No: false },
+    { question: 'Have you started consuming caffeine or sugars, or increased your intake of them?', imgs: c2q6, Yes: false, No: false },
+    { question: 'Do you have a separate room in your house, and do you spend time there often?', imgs: c2q7, Yes: false, No: false },
+    { question: 'Are any financial issues bothering you?', imgs: c2q8, Yes: false, No: false },
+    { question: 'Are any issues with friends or your love life bothering you?', imgs: c2q9, Yes: false, No: false },
+    { question: 'Do you have difficulty concentrating, a limited attention span, or a loss of objectivity?', imgs: c2q10, Yes: false, No: false },
+    { question: 'Have you experienced any uncomfortable incidents or situations at your workplace or university where you couldnt inform anyone or find a way to deal with it?', imgs: c2q11, Yes: false, No: false },
   ];
 
   const Questionsthree = [
@@ -68,6 +108,12 @@ function App() {
     { question: 'Do you attend classes regularly?', imgs: c3q3, Yes: false, No: false },
     { question: 'Do you get satisfied with your goals and results?', imgs: c3q4, Yes: false, No: false },
     { question: 'Do you wait until the last minute to complete your assignments?', imgs: c3q5, Yes: false, No: false },
+    { question: 'Do you start working on your tasks or assignments as soon as they are assigned?', imgs: c3q6, Yes: false, No: false },
+    { question: 'Do you compare your results and hard work with your peers?', imgs: c3q7, Yes: false, No: false },
+    { question: 'Do you sometimes avoid working on your tasks, studying, or completing assignments?', imgs: c3q8, Yes: false, No: false },
+    { question: 'Do you feel pressured by your study workload or grades?', imgs: c3q9, Yes: false, No: false },
+    { question: 'Do you find it difficult to balance your study life?', imgs: c3q10, Yes: false, No: false },
+
   ];
 
   const Questionsfour = [
@@ -76,6 +122,10 @@ function App() {
     { question: 'Have you noticed increased heart rate, respiration, or blood pressure?', imgs: c4q3, Yes: false, No: false },
     { question: 'Have you seen any sudden weight change?', imgs: c4q4, Yes: false, No: false },
     { question: 'Have you started avoiding activities or places that trigger memories?', imgs: c4q5, Yes: false, No: false },
+    { question: 'Have you experienced any upset stomach, nausea, or diarrhea right after eating?', imgs: c4q6, Yes: false, No: false },
+    { question: 'Recently, do you feel a decreased resistance to cold, flu, infections, flare-ups of allergies, asthma, or arthritis, or have you experienced hair loss?', imgs: c4q7, Yes: false, No: false },
+    { question: 'Lately, do you feel uncoordinated, experience headaches, or get easily startled?', imgs: c4q8, Yes: false, No: false },
+    { question: 'Have you noticed any sudden increase or loss in your weight?', imgs: c4q9, Yes: false, No: false },
   ];
 
   return (
@@ -143,9 +193,11 @@ function QuestionsWrapper({ QuestionsOne, Questionstwo, Questionsthree, Question
     />
   ) : (
     <div className="h-screen w-screen flex items-center justify-center bg-[#7A4BC8] text-white text-2xl">
-      No more questions.
+      <Link to='/hometwo'>
+      <button className='bg-black text-white px-20 py-4 text-xl rounded-2xl absolute top-[62%] left-[23%]'> Go to Cluster-2 </button>
+      </Link>
     </div>
   );
 }
 
-export default App;
+export default App;

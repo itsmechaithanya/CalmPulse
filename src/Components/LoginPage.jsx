@@ -60,7 +60,7 @@ function LoginPage() {
           <input
             className='py-4 px-7 rounded-full'
             type="text"
-            placeholder='Username or Email'
+            placeholder='Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
