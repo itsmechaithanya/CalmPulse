@@ -8,12 +8,9 @@ function Questions({ question, img, Yes, No, handleQuestion, index, goToPrevious
         <div className='relative h-[80vh] w-[90vw] bg-[#9676cd] rounded-[2vh] mt-[-5vh]'>
           <h1 className='pt-[5vh] px-[2.5vh] text-white text-[3vh] font-light'>{question}</h1>
           
-          {/* Image in the center */}
-          <div className='flex items-center justify-center h-[46vh] w-[45vh] object-cover'>
-            <img className='pt-[2vh] h-full w-full overflow-hidden' src={img} alt="" />
+          <div className='flex items-center justify-center h-[46vh] w-[41.6vh]'>
+            <img className='pt-[2vh] h-full w-full object-cover overflow-hidden' src={img} alt="" />
           </div>
-
-          {/* Yes and No buttons centered below the image */}
           <div className='absolute bottom-[6.25vh] left-0 right-0 flex justify-center gap-[5vh]'>
             <button
               onClick={() => handleQuestion(index, 'Yes')}
