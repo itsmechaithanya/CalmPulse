@@ -83,7 +83,7 @@ function App() {
     { question: 'Do you observe any changes like poor appetite, less sleeping?', imgs: c1q8, Yes: false, No: false},
     { question: 'Did you cry more often these days?', imgs: c1q9, Yes: false, No: false},
     { question: 'Are able to find some personal time for self care, watching something you like?', imgs: c1q10, Yes: false, No: false},
-    { question: 'Did you notice any memory problems/forgetfulness recently ?', imgs: c1q11, Yes: false, No: false},
+    { question: 'Did you notice any memory problems or forgetfulness recently ?', imgs: c1q11, Yes: false, No: false},
     { question: 'Do you face any difficulty setting priorities or making decisions?', imgs: c1q12, Yes: false, No: false},
     { question: 'Did you notice anything like impatient with your fellow mates or disrespectful to others?', imgs: c1q13, Yes: false, No: false},
   ];

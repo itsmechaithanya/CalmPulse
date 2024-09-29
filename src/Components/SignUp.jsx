@@ -1,123 +1,163 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import imgg from '../assets/b08f403ff43bbe883c702ab13eccb016.png';
 import imggg from '../assets/247ade28c862c6b10881b9307e6df568.png';
 import { FcGoogle } from "react-icons/fc";
 import { auth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, db } from './firebase';
-import { setDoc, doc } from "firebase/firestore";
-import { toast } from 'react-toastify'; // Assuming you're using toast for success messages
+import { setDoc, doc, getDoc } from "firebase/firestore";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [phoneNumber, setPhone] = useState("");
-  const [error, setError] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const navigate = useNavigate(); // Use navigate to redirect
+  const navigate = useNavigate();
+
+  const validateForm = () => {
+    let isValid = true;
+    if (!name.trim()) {
+      toast.error("Name is required");
+      isValid = false;
+    }
+    if (!phoneNumber.trim()) {
+      toast.error("Phone number is required");
+      isValid = false;
+    }
+    if (!email.trim()) {
+      toast.error("Email is required");
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Email is invalid");
+      isValid = false;
+    }
+    if (!password.trim()) {
+      toast.error("Password is required");
+      isValid = false;
+    } else if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long");
+      isValid = false;
+    }
+    if (!termsAccepted) {
+      toast.error("You must accept the Terms of Service and Privacy Policy");
+      isValid = false;
+    }
+    return isValid;
+  };
+
+  const checkIfEmailExists = async (email) => {
+    const userDoc = await getDoc(doc(db, "Users", email));
+    return userDoc.exists();
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
     try {
-      // Register user with email and password
+      // Check if email already exists
+      const emailExists = await checkIfEmailExists(email);
+      if (emailExists) {
+        toast.error("This email is already in use. Please use a different email.");
+        return;
+      }
+
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
       if (user) {
-        console.log('User object:', user); 
+        console.log('User object:', user);
 
-        // Add user to Firestore database
-        await setDoc(doc(db, "Users", user.uid), {
+        // Create a unique user key
+        const userKey = user.uid;
+
+        // Add user to Firestore database using the unique key
+        await setDoc(doc(db, "Users", userKey), {
           email: user.email,
-          username: name,  
-          phonenumber: phoneNumber, 
+          username: name,
+          phonenumber: phoneNumber,
         });
 
         console.log("User registered successfully with Firestore:", { name, phoneNumber, email });
-
-        // Redirect to login page after successful registration
+        toast.success("Account created successfully!");
         navigate('/login');
       }
 
     } catch (error) {
-      setError(error.message);
       console.log("Registration Error: ", error.message);
-      toast.error(error.message, {
-        position: "bottom-center"
-      });
+      toast.error(error.message);
     }
   };
 
   const handleGoogleSignUp = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      // Sign up user with Google
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Check if the Google account email already exists in our database
+      const emailExists = await checkIfEmailExists(user.email);
+      if (emailExists) {
+        toast.error("This Google account is already registered. Please log in instead.");
+        return;
+      }
+
+      // Create a unique user key
+      const userKey = user.uid;
+
+      // Add user to Firestore database using the unique key
+      await setDoc(doc(db, "Users", userKey), {
+        email: user.email,
+        username: user.displayName || '',
+        phonenumber: user.phoneNumber || '',
+      });
+
       console.log("User signed up with Google!");
+      toast.success("Signed up with Google successfully!");
+      navigate('/login');
     } catch (error) {
-      setError(error.message);
       console.log("Google Sign-up Error: ", error.message);
+      toast.error(error.message);
     }
   };
 
   return (
-    <div className='h-[100vh] w-[100vw] bg-[#7A4BC8] overflow-hidden relative'>
-      <img className='h-[20vh] absolute -top-[5vh] -right-[1vh]' src={imggg} alt="" />
-      <h1 className='text-white text-[4vh] font-semibold flex justify-center pt-[5vh]'>Sign Up</h1>
-      <div className='flex flex-col justify-center mt-[2vh] items-center'>
-        <button onClick={handleGoogleSignUp} className='text-white bg-black px-[4vh] flex justify-center items-center py-[2.5vh] rounded-[5vh] gap-[1.5vh] shadow'>
-          <FcGoogle size={"4vh"} />Sign up with Google
-        </button>
-      </div>
-      <div className='flex justify-center mt-[1vh]'>
-        <h1 className='capitalize text-[2vh]'>Or continue with Email</h1>
-      </div>
-      <div className='flex flex-col gap-[2vh] mx-[2.5vh] justify-center mt-[3vh]'>
-        <input
-          className='py-[2vh] px-[3.5vh] rounded-[5vh] text-[2vh]'
-          type="text"
-          placeholder='Enter Your Name'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          className='py-[2vh] px-[3.5vh] rounded-[5vh] text-[2vh]'
-          type="text"
-          placeholder='Enter Your Phone number'
-          value={phoneNumber}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <input
-          className='py-[2vh] px-[3.5vh] rounded-[5vh] text-[2vh]'
-          type="email"
-          placeholder='Enter Your Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          className='py-[2vh] px-[3.5vh] rounded-[5vh] text-[2vh]'
-          type="password"
-          placeholder='Enter Your Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div className='flex items-center px-[1.5vh] mt-[2vh]'>
-        <input className='h-[2.5vh] w-[2.5vh] ml-[2vh] mr-[2.5vh] bg-red-900 shadow' type="checkbox" />
-        <h1 className='text-white capitalize text-[1.8vh]'>I agree with the Terms of Service and Privacy policy</h1>
-      </div>
-      <div className='flex justify-end mt-[2vh] mr-[10vh]'>
-        <button onClick={handleRegister} className='bg-black text-white px-[4vh] py-[2.5vh] rounded-[5vh] shadow absolute right-[2vh] mt-[-1.5vh] z-10 text-[2vh]'>
-          Create Account
-        </button>
-      </div>
-      <div className='absolute right-[1vh] bottom-[5vh] z-10'>
-        <Link to="/login">
-          <h1 className='text-white capitalize mb-[-5.5vh] text-[2vh]'>Already have an account?</h1>
-          <button className='ml-[3vh] mt-[6vh] bg-black text-white px-[8vh] py-[2.5vh] rounded-[5vh] shadow text-[2vh]'>Log In</button>
-        </Link>
-      </div>
-      <img className='absolute -bottom-[10vh] -left-[9.5vh] h-[37vh]' src={imgg} alt="" />
+    <div className='h-screen w-screen bg-[#7A4BC8] overflow-hidden relative'>
+        <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        <img className='h-[20vh] absolute -top-[5vh] -right-2' src={imggg} alt="" />
+        <h1 className='text-white text-3xl font-semibold flex justify-center pt-[10vh]'>Sign Up</h1>
+        <div className='flex flex-col justify-center mt-[3vh] items-center'>
+            <button onClick={handleGoogleSignUp} className='text-white bg-black px-8 flex justify-center items-center py-5 rounded-full gap-3 shadow'><FcGoogle size={"1.5em"} />Sign up with Google</button>
+        </div>
+        <div className='flex justify-center mt-2'>
+            <h1 className=' capitalize'>Or continue with Email</h1>
+        </div>
+        <form onSubmit={handleRegister} className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10'>
+          <input className='py-4 px-7 rounded-full w-full' type="text" placeholder='Enter Your Name' value={name} onChange={(e) => setName(e.target.value)} required />
+          <input className='py-4 px-7 rounded-full w-full' type="tel" placeholder='Enter Your Phone number' value={phoneNumber} onChange={(e) => setPhone(e.target.value)} required />
+          <input className='py-4 px-7 rounded-full w-full' type="email" placeholder='Enter Your Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input className='py-4 px-7 rounded-full w-full' type="password" placeholder='Enter Your Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <div className='flex items-center px-3 mt-0'> 
+            <input className='h-5 w-5 ml-4 mr-5 bg-red-900 shadow' type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} required />
+            <h1 className='text-white capitalize'>I agree with the Terms of Service and Privacy policy</h1>
+          </div>
+          <div className='flex justify-end mt-0 mr-15'>
+            <button type="submit" className='bg-black text-white px-8 py-5 rounded-full shadow'>Create Account</button>
+          </div>
+        </form>
+        <div className='flex justify-end mt-10 mr-5 text-white'> 
+          <h1 className=' capitalize'><a href="">Already have an account?</a></h1>
+        </div>
+        <div className='flex justify-end mt-2 mr-5 '>
+          <Link to="/login">
+          <button className='bg-black text-white px-16 py-5 rounded-full shadow'>Log In</button>
+          </Link>
+        </div>
+        <img className='absolute -bottom-[30vh] -left-[11vh] h-[60vh]' src={imgg} alt="" />
     </div>
   );
 }
