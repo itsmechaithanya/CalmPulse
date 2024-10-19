@@ -1,27 +1,42 @@
-import React, { useState } from 'react';
-import { db } from './firebase'; // Import Firestore
+import React, { useState, useEffect } from 'react';
+import { db } from './firebase'; // Import your Firestore configuration
 import { doc, setDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
-function Questions({ userId, goToPreviousQuestion, goToNextQuestion }) {
-  const [selectedOption, setSelectedOption] = useState('');
+function Questions({ question, selectedOptions, handleQuestion, index, goToPreviousQuestion, canGoBack, goToNextQuestion, image, totalQuestions }) {
+  const options = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
 
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
+  const [selected, setSelected] = useState(selectedOptions.length > 0 ? selectedOptions[index] : '');
+  const [progressPercentage, setProgressPercentage] = useState(0);
+  const [progressColor, setProgressColor] = useState('#9676cd');
+
+  useEffect(() => {
+    setProgressPercentage((index / totalQuestions) * 100);
+  }, [index, totalQuestions]);
+
+  const handleOptionClick = (option) => {
+    setSelected(option);
+    handleQuestion(index, option);
   };
 
   const storeResponse = async () => {
-    if (!userId) {
-      console.error("User ID is not defined.");
-      return; // Early return if userId is not defined
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user) {
+      console.error("User is not authenticated.");
+      return;
     }
 
+    const userId = user.uid;
+
     try {
-      const userDocRef = doc(db, 'Users', userId); // Reference to the user's document
+      const userDocRef = doc(db, 'Users', userId);
       await setDoc(userDocRef, {
         responses: {
-          question: selectedOption, // Store the response under the question key
+          [`question_${index + 1}`]: selected,
         },
-      }, { merge: true }); // Merge with existing data
+      }, { merge: true });
       console.log("Response stored successfully.");
     } catch (error) {
       console.error("Error storing response:", error);
@@ -30,49 +45,51 @@ function Questions({ userId, goToPreviousQuestion, goToNextQuestion }) {
 
   const handleNext = async () => {
     await storeResponse();
-    goToNextQuestion(); 
+    setProgressColor('#9676cd');
+    goToNextQuestion();
   };
 
   return (
-    <div className="bg-purple-700 w-[375px] h-[667px] mx-auto rounded-3xl p-6 shadow-lg">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-white text-lg font-bold">Hi, Vaishnavi</h1>
-        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-          <span className="text-xs text-purple-700 font-bold">P</span>
+    <div className='h-[100vh] w-[100vw] overflow-hidden bg-[#7A4BC8] flex flex-col items-center'>
+      {/* Question Frame */}
+      <div className='relative h-[85vh] w-[90vw] bg-white rounded-[20px] mt-6 flex flex-col items-center p-6'>
+         
+        {/* Inner Frame for Question */}
+        <div className='relative h-[25vh] w-[80vw] bg-[#C489CF] rounded-[20px] flex flex-col justify-center items-center p-6'>
+          <h1 className='text-white text-[24px] text-center font-bold'>
+            {question || 'Loading...'}
+          </h1>
         </div>
-      </div>
 
-      {/* Question Box */}
-      <div className="bg-purple-400 text-white text-center p-6 rounded-xl mb-6">
-        <p className="text-2xl font-bold">I Feel Calm</p>
-      </div>
+        {/* Options placed below the question frame */}
+        <div className='flex flex-col w-[80vw] mt-6 space-y-4'>
+          {options.map((option, i) => (
+            <label key={i} className={`cursor-pointer flex items-center justify-between w-full px-5 py-3 rounded-lg text-lg 
+                ${selected === option ? 'bg-[#d8f2a1] text-black font-semibold' : 'bg-[#F5F5F5] text-gray-800'}`}>
+              <span>{String.fromCharCode(65 + i)}. {option}</span>
+              <input
+                type="radio"
+                name={`question-${index}`}
+                className="h-5 w-5"
+                checked={selected === option}
+                onChange={() => handleOptionClick(option)}
+              />
+            </label>
+          ))}
+        </div>
 
-      {/* Options */}
-      <div className="space-y-4">
-        {['A', 'B', 'C', 'D', 'E'].map((option) => (
-          <label key={option} className={`flex items-center p-4 rounded-lg cursor-pointer ${selectedOption === option ? 'bg-green-300' : 'bg-purple-200'}`}>
-            <input
-              type="radio"
-              name="response"
-              value={option}
-              className="mr-4"
-              checked={selectedOption === option}
-              onChange={handleOptionChange}
-            />
-            {option === 'A' ? 'Strongly Disagree' : option === 'B' ? 'Disagree' : option === 'C' ? 'Neutral' : option === 'D' ? 'Agree' : 'Strongly Agree'}
-          </label>
-        ))}
-      </div>
+        {/* Navigation Buttons at the bottom of the white frame */}
+        <div className="flex justify-between w-full mt-auto pt-6 pb-4">
+          {canGoBack && (
+            <button onClick={goToPreviousQuestion} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl'>
+              Previous
+            </button>
+          )}
+          <button onClick={handleNext} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selected}>
+            Next
+          </button>
+        </div>
 
-      {/* Navigation Buttons */}
-      <div className="flex justify-between mt-6">
-        <button onClick={goToPreviousQuestion} className="bg-purple-800 text-white py-2 px-6 rounded-xl hover:bg-purple-900">
-          Previous
-        </button>
-        <button onClick={handleNext} className="bg-purple-800 text-white py-2 px-6 rounded-xl hover:bg-purple-900" disabled={!selectedOption}>
-          Next
-        </button>
       </div>
     </div>
   );
