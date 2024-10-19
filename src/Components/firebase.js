@@ -21,4 +21,3 @@ const db = getFirestore(app);
 // Export necessary Firebase functions
 export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, db };
 export default app;
-

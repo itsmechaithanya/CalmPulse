@@ -19,6 +19,11 @@ function LoginPage() {
     return emailRegex.test(email);
   };
 
+  // Password validation function (min 6 characters)
+  const validatePassword = (password) => {
+    return password.length >= 6;
+  };
+
   // Handle Login with Email and Password
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,6 +39,10 @@ function LoginPage() {
     }
     if (!password.trim()) {
       toast.error('Password is required');
+      return;
+    }
+    if (!validatePassword(password)) {
+      toast.error('Password should be at least 6 characters');
       return;
     }
 

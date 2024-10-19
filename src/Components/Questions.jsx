@@ -1,40 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { db } from './firebase'; // Import Firestore
+import { doc, setDoc } from 'firebase/firestore';
 
-function Questions({ question, img, Yes, No, handleQuestion, index, goToPreviousQuestion, canGoBack }) {
+function Questions({ userId, goToPreviousQuestion, goToNextQuestion }) {
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
+  const storeResponse = async () => {
+    if (!userId) {
+      console.error("User ID is not defined.");
+      return; // Early return if userId is not defined
+    }
+
+    try {
+      const userDocRef = doc(db, 'Users', userId); // Reference to the user's document
+      await setDoc(userDocRef, {
+        responses: {
+          question: selectedOption, // Store the response under the question key
+        },
+      }, { merge: true }); // Merge with existing data
+      console.log("Response stored successfully.");
+    } catch (error) {
+      console.error("Error storing response:", error);
+    }
+  };
+
+  const handleNext = async () => {
+    await storeResponse();
+    goToNextQuestion(); 
+  };
 
   return (
-    <div className='h-[100vh] w-[100vw] overflow-hidden bg-[#7A4BC8]'>
-      <div className='flex flex-col items-center justify-center mt-[10vh]'>
-        <div className='relative h-[80vh] w-[90vw] bg-[#9676cd] rounded-[2vh] mt-[-5vh]'>
-          <h1 className='pt-[5vh] px-[2.5vh] text-white text-[3vh] font-light'>{question}</h1>
-          
-          <div className='flex items-center justify-center h-[46vh] w-[41.6vh]'>
-            <img className='pt-[2vh] h-full w-full object-cover overflow-hidden' src={img} alt="" />
-          </div>
-          <div className='absolute bottom-[6.25vh] left-0 right-0 flex justify-center gap-[5vh]'>
-            <button
-              onClick={() => handleQuestion(index, 'Yes')}
-              className={`${Yes ? "bg-[#309b47] font-medium" : "bg-[#7A4BC8]"} w-[16.25vh] h-[6.25vh] rounded-full text-white font-medium text-[3vh]`}
-            >
-              Yes
-            </button>
-            <button
-              onClick={() => handleQuestion(index, 'No')}
-              className={`${No ? "bg-[#cd3b3b] font-medium" : "bg-[#7A4BC8]"} w-[16.25vh] h-[6.25vh] rounded-full text-white text-[3vh]`}
-            >
-              No
-            </button>
-          </div>
+    <div className="bg-purple-700 w-[375px] h-[667px] mx-auto rounded-3xl p-6 shadow-lg">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-white text-lg font-bold">Hi, Vaishnavi</h1>
+        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+          <span className="text-xs text-purple-700 font-bold">P</span>
         </div>
       </div>
 
-      {/* Go Back Button */}
-      <div className='flex pt-[2vh] pl-[5vw]'>
-        {canGoBack && (
-          <button onClick={goToPreviousQuestion}>
-            <i className="border-[0.5vh] border-black rounded-full text-[6.25vh] ri-arrow-left-line"></i>
-          </button>
-        )}
+      {/* Question Box */}
+      <div className="bg-purple-400 text-white text-center p-6 rounded-xl mb-6">
+        <p className="text-2xl font-bold">I Feel Calm</p>
+      </div>
+
+      {/* Options */}
+      <div className="space-y-4">
+        {['A', 'B', 'C', 'D', 'E'].map((option) => (
+          <label key={option} className={`flex items-center p-4 rounded-lg cursor-pointer ${selectedOption === option ? 'bg-green-300' : 'bg-purple-200'}`}>
+            <input
+              type="radio"
+              name="response"
+              value={option}
+              className="mr-4"
+              checked={selectedOption === option}
+              onChange={handleOptionChange}
+            />
+            {option === 'A' ? 'Strongly Disagree' : option === 'B' ? 'Disagree' : option === 'C' ? 'Neutral' : option === 'D' ? 'Agree' : 'Strongly Agree'}
+          </label>
+        ))}
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex justify-between mt-6">
+        <button onClick={goToPreviousQuestion} className="bg-purple-800 text-white py-2 px-6 rounded-xl hover:bg-purple-900">
+          Previous
+        </button>
+        <button onClick={handleNext} className="bg-purple-800 text-white py-2 px-6 rounded-xl hover:bg-purple-900" disabled={!selectedOption}>
+          Next
+        </button>
       </div>
     </div>
   );
