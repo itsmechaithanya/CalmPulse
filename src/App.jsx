@@ -9,7 +9,8 @@ import Details from './Components/Details';
 import Home from './Components/Home';
 import Questions from './Components/Questions';
 import Homethree from './Components/Homethree';
-import Homefour from './Components/Homefour';
+import Homefour from './Components/HomeFour';
+
 
 function App() {
   const [QuestionsOne, setQuestionsOne] = useState([
