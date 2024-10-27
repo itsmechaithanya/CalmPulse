@@ -1,5 +1,3 @@
-App.jsx
-
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Link } from 'react-router-dom';
 import Landing from './Components/Landing';
@@ -10,8 +8,11 @@ import Home from './Components/Home';
 import Questions from './Components/Questions';
 import Homethree from './Components/Homethree';
 import Homefour from './Components/HomeFour';
-
-
+import Knowmore from './Components/Knowmore';
+import Nextlevel from './Components/Nextlevel';
+import C1result from './Components/C1result';
+import Home3 from './Components/Home3';
+import Home4 from './Components/Home4';
 function App() {
   const [QuestionsOne, setQuestionsOne] = useState([
     { question: 'I feel calm ', selectedOptions: [] },
@@ -61,9 +62,13 @@ function App() {
   ]);
 
   const [Questionsfour, setQuestionsfour] = useState([
-    { question: 'Have you recently experienced an accident of any kind and are feeling nervous about your safety or the surrounding environment?', selectedOptions: [] }, 
-    { question: 'Have you noticed any changes in yourself, such as avoiding activities or places that trigger memories?', selectedOptions: [] },
-    { question: 'Fight with boyfriend/ Girlfriend', selectedOptions: [] },
+    { question: 'I have recently experienced an accident of some kind?', selectedOptions: [] }, 
+    { question: 'I feel nervous about my safety after the accident?', selectedOptions: [] },
+    { question: 'I feel anxious about my surrounding environment after the accident?', selectedOptions: [] },
+    { question: 'I have noticed changes in myself recently?', selectedOptions: [] }, 
+    { question: 'I avoid certain activities that trigger memories?', selectedOptions: [] }, 
+    { question: 'I avoid certain places that remind me of past events?', selectedOptions: [] }, 
+    { question: 'I have been fighting with my boyfriend/ Girlfriend?', selectedOptions: [] }, 
     // Add more questions as needed
   ]);
 
@@ -73,6 +78,11 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/knowmore" element={<Knowmore />} />
+        <Route path="/nextlevel" element={<Nextlevel />} />
+        <Route path="/c1result" element={<C1result />} />
+        <Route path="/home3" element={<Home3 />} />
+        <Route path="/home4" element={<Home4 />} />
         <Route path="/details" element={<Details />} />
         <Route path="/home" element={<Home />} />
         <Route path="/homethree" element={
