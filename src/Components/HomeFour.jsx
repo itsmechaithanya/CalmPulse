@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { db, auth } from './firebase'; // Import Firestore and Auth
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 function Homefour({ Questions }) {
   const [selectedResponses, setSelectedResponses] = useState(Array(Questions.length).fill(''));
-  const [selectedScores, setSelectedScores] = useState(Array(Questions.length).fill(0)); // State for selected scores
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [progressPercentage, setProgressPercentage] = useState(0);
-  const [progressColor, setProgressColor] = useState('#9676cd');
   const [userName, setUserName] = useState(''); // State for user's name
-  const [userId, setUserId] = useState(null); // State for user ID
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     setProgressPercentage((currentQuestionIndex / Questions.length) * 100);
@@ -22,7 +21,6 @@ function Homefour({ Questions }) {
       try {
         const userDocRef = doc(db, 'Users', uid);
         const userDocSnap = await getDoc(userDocRef);
-
         if (userDocSnap.exists()) {
           const userData = userDocSnap.data();
           setUserName(userData.username); // Assuming 'username' field exists
@@ -37,7 +35,6 @@ function Homefour({ Questions }) {
     // Listen for authentication state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUserId(user.uid); // Set user ID
         fetchUserData(user.uid); // Fetch user data from Firestore
       } else {
         console.log("No user is logged in");
@@ -50,12 +47,9 @@ function Homefour({ Questions }) {
 
   const handleOptionClick = (option) => {
     const updatedResponses = [...selectedResponses];
-    const updatedScores = [...selectedScores];
     updatedResponses[currentQuestionIndex] = option;
-    updatedScores[currentQuestionIndex] = getScore(option); // Get score based on option
     setSelectedResponses(updatedResponses);
-    setSelectedScores(updatedScores);
-    console.log(`Option selected: ${option}, Score: ${getScore(option)}`); // Log the selected option and score
+    console.log(`Option selected: ${option}`); // Log the selected option
   };
 
   const getScore = (option) => {
@@ -84,6 +78,7 @@ function Homefour({ Questions }) {
     }
 
     const userId = user.uid;
+    const score = getScore(selectedResponses[currentQuestionIndex]); // Get score based on selected response
 
     try {
       const userDocRef = doc(db, 'Users', userId);
@@ -91,24 +86,85 @@ function Homefour({ Questions }) {
         responses: {
           [`homefour_question_${currentQuestionIndex + 1}`]: {
             option: selectedResponses[currentQuestionIndex],
-            score: selectedScores[currentQuestionIndex],
+            score: score,
           },
         },
       }, { merge: true });
-      console.log("Response stored successfully.");
+      console.log(`Response stored: Option: ${selectedResponses[currentQuestionIndex]}, Score: ${score}`);
     } catch (error) {
       console.error("Error storing response:", error);
     }
   };
 
   const handleNext = async () => {
-    await storeResponse();
-    setProgressColor('#9676cd');
+    await storeResponse(); // Store response when moving to the next question
     setCurrentQuestionIndex(prev => Math.min(prev + 1, Questions.length - 1));
   };
 
   const handlePrevious = () => {
     setCurrentQuestionIndex(prev => Math.max(prev - 1, 0));
+  };
+
+  const handleSubmit = async () => {
+    await storeResponse();
+    const homefourTotalScore = selectedResponses.reduce((acc, response) => acc + getScore(response), 0); // Calculate total score for Homefour
+    console.log("Total score from Homefour:", homefourTotalScore); // Log total score
+
+    // Fetch Homethree total score from Firebase
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("User is not authenticated.");
+      return;
+    }
+
+    const userId = user.uid;
+    const userDocRef = doc(db, 'Users', userId);
+    const userDocSnap = await getDoc(userDocRef);
+    let homethreeTotalScore = 0;
+
+    if (userDocSnap.exists()) {
+      const userData = userDocSnap.data();
+      homethreeTotalScore = userData.homethreeTotalScore || 0; // Get Homethree total score
+    } else {
+      console.log("No Homethree total score found in Firestore.");
+    }
+
+    const combinedTotalScore = homefourTotalScore + homethreeTotalScore; // Combine scores
+    console.log("Combined total score:", combinedTotalScore); // Log combined score
+
+    // Calculate percentage
+    const totalQuestions = 18 + 7; // Total questions in homethree and homefour
+    const maxScore = totalQuestions * 4; // Max score is 4 per question
+    const combinedPercentage = (combinedTotalScore / maxScore) * 100; // Calculate percentage
+
+    console.log("Combined total score percentage:", combinedPercentage); // Log percentage
+
+    // Store combined total score and percentage in Firebase
+    await storeCombinedTotalScore(combinedTotalScore, combinedPercentage); // Store combined total score in Firebase
+    navigate('/finalresult'); // Navigate to Finalresult page after submitting
+  };
+
+  // Function to store combined total score and percentage in Firebase
+  const storeCombinedTotalScore = async (combinedTotalScore, combinedPercentage) => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      console.error("User is not authenticated.");
+      return;
+    }
+
+    const userId = user.uid;
+
+    try {
+      const userDocRef = doc(db, 'Users', userId);
+      await setDoc(userDocRef, {
+        combinedTotalScore: combinedTotalScore, // Store combined total score
+        combinedScorePercentage: combinedPercentage, // Store combined score percentage
+      }, { merge: true });
+      console.log("Combined total score and percentage stored successfully:", combinedTotalScore, combinedPercentage); // Log the stored values
+    } catch (error) {
+      console.error("Error storing combined total score:", error);
+    }
   };
 
   return (
@@ -127,8 +183,8 @@ function Homefour({ Questions }) {
             className="h-full"
             style={{
               width: `${progressPercentage}%`,
-              backgroundColor: progressColor,
-              transition: 'width 0.3s ease, background-color 0.3s ease',
+              backgroundColor: '#9676cd',
+              transition: 'width 0.3s ease',
             }}
           />
         </div>
@@ -167,6 +223,11 @@ function Homefour({ Questions }) {
           {currentQuestionIndex < Questions.length - 1 && (
             <button onClick={handleNext} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selectedResponses[currentQuestionIndex]}>
               Next
+            </button>
+          )}
+          {currentQuestionIndex === Questions.length - 1 && (
+            <button onClick={handleSubmit} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl'>
+              Submit
             </button>
           )}
         </div>

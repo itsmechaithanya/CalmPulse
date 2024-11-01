@@ -13,6 +13,8 @@ import Nextlevel from './Components/Nextlevel';
 import C1result from './Components/C1result';
 import Home3 from './Components/Home3';
 import Home4 from './Components/Home4';
+import Finalresult from './Components/Finalresult';
+
 function App() {
   const [QuestionsOne, setQuestionsOne] = useState([
     { question: 'I feel calm ', selectedOptions: [] },
@@ -84,6 +86,7 @@ function App() {
         <Route path="/home3" element={<Home3 />} />
         <Route path="/home4" element={<Home4 />} />
         <Route path="/details" element={<Details />} />
+        <Route path="/finalresult" element={<Finalresult />} />
         <Route path="/home" element={<Home />} />
         <Route path="/homethree" element={
   <Homethree Questions={Questionsthree} />

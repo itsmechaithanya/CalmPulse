@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db, auth } from './firebase'; // Import your Firestore configuration
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
 
 function Questions({ question, selectedOptions, handleQuestion, index, goToPreviousQuestion, canGoBack, goToNextQuestion, totalQuestions }) {
   const options = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
@@ -12,6 +13,7 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
   const [userName, setUserName] = useState(''); // State for user's name
   const [userId, setUserId] = useState(null); // State for user ID
   const [totalScore, setTotalScore] = useState(0); // State to keep track of total score
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   useEffect(() => {
     const fetchUserData = async (uid) => {
@@ -47,7 +49,7 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
   const handleOptionClick = (option) => {
     setSelected(option);
     handleQuestion(index, option);
-    setTotalScore(totalScore + optionScores[option]); // Update total score
+    setTotalScore(prevScore => prevScore + optionScores[option]); // Update total score
   };
 
   const storeResponse = async () => {
@@ -76,15 +78,41 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
     }
   };
 
+  const storeTotalScore = async () => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      console.error("User is not authenticated.");
+      return;
+    }
+
+    const userId = user.uid;
+
+    try {
+      const userDocRef = doc(db, 'Users', userId);
+      await setDoc(userDocRef, {
+        totalScore: totalScore,
+      }, { merge: true });
+      console.log("Total score stored successfully: ", totalScore);
+    } catch (error) {
+      console.error("Error storing total score:", error);
+    }
+  };
+
   const handleNext = async () => {
     await storeResponse();
+    if (index + 1 < totalQuestions) {
+      goToNextQuestion();
+    } else {
+      await handleSubmit(); // Call handleSubmit if it's the last question
+    }
     setProgressColor('#6149A9'); // Change progress bar color on next click
     if (index + 1 === totalQuestions) {
       console.log("Total Score: ", totalScore); // Log the total score after all questions are answered
+      await storeTotalScore(); // Store the total score in Firestore
+      navigate('/knowmore'); // Navigate to Knowmore page after last question
     }
-    goToNextQuestion();
   };
-
   return (
     <div className='h-[100vh] w-[100vw] overflow-hidden bg-[#7A4BC8] flex flex-col items-center'>
       {/* Hi, message for user */}
@@ -132,9 +160,15 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
               Previous
             </button>
           )}
-          <button onClick={handleNext} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selected}>
-            Next
-          </button>
+          {index + 1 === totalQuestions ? (
+            <button onClick={handleSubmit} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selected}>
+              Submit
+            </button>
+          ) : (
+            <button onClick={handleNext} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selected}>
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>
