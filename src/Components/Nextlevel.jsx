@@ -1,6 +1,6 @@
 import React from 'react';
 import 'remixicon/fonts/remixicon.css';
-import illustration from '../assets/nextlevel.png'; // Replace with your illustration image path
+import illustration from '../assets/Nextlevel.png'; // Replace with your illustration image path
 import logo from '../assets/logo-1.png'; // Replace with your logo image path
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
