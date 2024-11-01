@@ -153,7 +153,7 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
           ))}
         </div>
 
-        {/* Navigation Buttons at the bottom of the white frame */}
+        {/* Navigation Buttons at the bottom of the white frame */} 
         <div className="flex justify-between w-full mt-auto pt-6 pb-4">
           {canGoBack && (
             <button onClick={goToPreviousQuestion} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl'>
