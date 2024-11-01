@@ -1,6 +1,6 @@
 import React from 'react';
 import 'remixicon/fonts/remixicon.css';
-import illustration from '../assets/knowmore.png'; 
+import illustration from '../assets/knowmore.png';  
 import logo from '../assets/logo-1.png';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
