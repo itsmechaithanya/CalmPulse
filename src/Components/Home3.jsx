@@ -7,22 +7,22 @@ function Home3() {
     <div className="h-screen w-screen bg-[#7A4BC8] flex flex-col justify-center items-center">
       
       {/* Title */}
-      <h1 className="text-white text-center text-xl font-medium mb-6">
+      <h1 className="text-white text-center text-3xl font-medium mb-6">
         Let's Get A Clear Picture <br /> About The Reason
       </h1>
 
       {/* Illustration */}
-      <img src={illustration} alt="Illustration" className="w-64 h-64 mb-6" />
+      <img src={illustration} alt="Illustration" className="w-96 h-96 mb-6" /> {/* Increased size of the image */}
 
       {/* Description */}
-      <p className="text-white text-center text-lg mb-10">
+      <p className="text-white text-center text-3xl mb-10">
         You Will Have To Answer <br /> A Few Questions
       </p>
 
       {/* Ready Button */}
       <Link to="/homethree">
-        <button className="bg-white text-[#7A4BC8] text-lg font-semibold py-3 px-16 rounded-full shadow-md hover:shadow-lg transition-all">
-          Ready
+      <button className="bg-white text-[#7A4BC8] text-3xl font-semibold py-4 px-24 rounded-full shadow-md hover:shadow-lg transition-all">
+      Ready
         </button>
       </Link>
     </div>

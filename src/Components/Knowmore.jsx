@@ -17,7 +17,7 @@ function Knowmore() {
       <div className="bg-white rounded-lg p-8 w-[80vw] h-[80vh] max-w-sm flex flex-col items-center">
         {/* Illustration */}
         <div className="flex flex-col items-center justify-center h-full">
-          <img src={illustration} alt="Illustration" className="mb-8 w-100 h-80" />
+          <img src={illustration} alt="Illustration" className="mb-8 w-60 h-60" /> {/* Decreased size of the image */}
           <Link to="/nextlevel">
             <button className="bg-[#9676cd] text-white text-lg font-semibold py-6 px-6 rounded-full mb-4 shadow-md hover:shadow-lg transition-all">
               Want To Know More?

@@ -1,3 +1,5 @@
+Questions.jsx
+
 import React, { useState, useEffect } from 'react';
 import { db, auth } from './firebase'; // Import your Firestore configuration
 import { doc, setDoc, getDoc } from 'firebase/firestore';
@@ -12,6 +14,7 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
   const [userName, setUserName] = useState(''); // State for user's name
   const [userId, setUserId] = useState(null); // State for user ID
   const [totalScore, setTotalScore] = useState(0); // State to keep track of total score
+  const [progressBarColor, setProgressBarColor] = useState('#4CAF50'); // Add this state
 
   useEffect(() => {
     const fetchUserData = async (uid) => {
@@ -78,7 +81,10 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
 
   const handleNext = async () => {
     await storeResponse();
-    setProgressColor('#6149A9'); // Change progress bar color on next click
+    setProgressBarColor('black');
+    setTimeout(() => {
+      setProgressBarColor('#4CAF50');
+    }, 500);
     if (index + 1 === totalQuestions) {
       console.log("Total Score: ", totalScore); // Log the total score after all questions are answered
     }
@@ -96,8 +102,8 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
       <div className='relative h-[85vh] w-[90vw] bg-white rounded-[20px] mt-6 flex flex-col items-center p-6'>
         {/* Progress Bar */}
         <div className='w-full mb-4'>
-          <div className='bg-gray-200 rounded-full h-2.5 dark:bg-gray-700'>
-            <div className={`bg-[${progressColor}] h-2.5 rounded-full`} style={{ width: `${(index + 1) / totalQuestions * 100}%` }}></div>
+          <div className='bg-black rounded-full h-2.5 dark:bg-[#f3ebeb]'>
+            <div className={`bg-[${progressBarColor}] h-2.5 rounded-full`} style={{ width: `${(index + 1) / totalQuestions * 100}%` }}></div>
           </div>
         </div>
 

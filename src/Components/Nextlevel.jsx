@@ -15,18 +15,18 @@ function Nextlevel() {
       />
 
       {/* White box containing illustration, text, and button */}
-      <div className="bg-white rounded-lg p-6 w-[80vw] max-w-md flex flex-col items-center">
+      <div className="bg-white rounded-lg p-6 w-[90vw] max-w-sm flex flex-col items-center">
         {/* Illustration */}
-        <img src={illustration} alt="Illustration" className="w-64 h-48 mb-4" />
+        <img src={illustration} alt="Illustration" className="w-50 h-60 mb-4" /> {/* Decreased size of the image */}
 
         {/* Description text */}
-        <p className="text-center text-black font-medium text-lg mb-8">
+        <p className="text-center text-black font-medium text-2xl mb-8">
           To Know More About What You Feel And Get Some Suggestions If Needed...
         </p>
 
         {/* Button */}
-        <Link to="/homethree">
-          <button className="bg-[#9676cd] text-white text-lg font-semibold py-3 px-10 rounded-full shadow-md hover:shadow-lg transition-all">
+        <Link to="/home3">
+          <button className="bg-[#9676cd] text-white text-lg font-semibold py-4 px-10 rounded-full shadow-md hover:shadow-lg transition-all">
             Go To Next Level
           </button>
         </Link>
