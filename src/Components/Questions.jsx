@@ -1,17 +1,13 @@
-Questions.jsx
-
 import React, { useState, useEffect } from 'react';
 import { db, auth } from './firebase'; // Import your Firestore configuration
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
 
 function Questions({ question, selectedOptions, handleQuestion, index, goToPreviousQuestion, canGoBack, goToNextQuestion, totalQuestions }) {
   const options = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
   const optionScores = { 'Strongly Disagree': 1, 'Disagree': 2, 'Neutral': 0, 'Agree': 3, 'Strongly Agree': 4 };
 
   const [selected, setSelected] = useState(selectedOptions.length > 0 ? selectedOptions[index] : '');
-  const [progressColor, setProgressColor] = useState('#D9D9D9'); // Initial progress bar color
   const [userName, setUserName] = useState(''); // State for user's name
   const [userId, setUserId] = useState(null); // State for user ID
   const [totalScore, setTotalScore] = useState(0); // State to keep track of total score
@@ -33,7 +29,6 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
       }
     };
 
-    // Listen for authentication state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserId(user.uid); // Set user ID
@@ -43,14 +38,13 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
       }
     });
 
-    // Clean up the listener on unmount
     return () => unsubscribe();
   }, []);
 
   const handleOptionClick = (option) => {
     setSelected(option);
     handleQuestion(index, option);
-    setTotalScore(prevScore => prevScore + optionScores[option]); // Update total score
+    setTotalScore(totalScore + optionScores[option]); // Update total score
   };
 
   const storeResponse = async () => {
@@ -79,36 +73,14 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
     }
   };
 
-  const storeTotalScore = async () => {
-    const user = auth.currentUser;
-
-    if (!user) {
-      console.error("User is not authenticated.");
-      return;
-    }
-
-    const userId = user.uid;
-
-    try {
-      const userDocRef = doc(db, 'Users', userId);
-      await setDoc(userDocRef, {
-        totalScore: totalScore,
-      }, { merge: true });
-      console.log("Total score stored successfully: ", totalScore);
-    } catch (error) {
-      console.error("Error storing total score:", error);
-    }
-  };
-
   const handleNext = async () => {
     await storeResponse();
-    setProgressColor('#6149A9'); // Change progress bar color on next click
     if (index + 1 === totalQuestions) {
-      console.log("Total Score: ", totalScore); // Log the total score after all questions are answered
-      await storeTotalScore(); // Store the total score in Firestore
-      navigate('/knowmore'); // Navigate to Knowmore page after last question
+      console.log("Total Score: ", totalScore);
     }
+    goToNextQuestion();
   };
+
   return (
     <div className='h-[100vh] w-[100vw] overflow-hidden bg-[#7A4BC8] flex flex-col items-center'>
       {/* Hi, message for user */}
@@ -120,8 +92,13 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
       <div className='relative h-[85vh] w-[90vw] bg-white rounded-[20px] mt-6 flex flex-col items-center p-6'>
         {/* Progress Bar */}
         <div className='w-full mb-4'>
-          <div className='bg-black rounded-full h-2.5 dark:bg-[#f3ebeb]'>
-            <div className={`bg-[${progressBarColor}] h-2.5 rounded-full`} style={{ width: `${(index + 1) / totalQuestions * 100}%` }}></div>
+          <div className='bg-[#f3ebeb] rounded-full h-2.5'>
+            <div 
+              className='h-2.5 rounded-full bg-black transition-all duration-500 ease-linear'
+              style={{ 
+                width: `${((index + 1) / totalQuestions) * 100}%`
+              }}
+            ></div>
           </div>
         </div>
 
@@ -149,22 +126,16 @@ function Questions({ question, selectedOptions, handleQuestion, index, goToPrevi
           ))}
         </div>
 
-        {/* Navigation Buttons at the bottom of the white frame */} 
+        {/* Navigation Buttons at the bottom of the white frame */}
         <div className="flex justify-between w-full mt-auto pt-6 pb-4">
           {canGoBack && (
             <button onClick={goToPreviousQuestion} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl'>
               Previous
             </button>
           )}
-          {index + 1 === totalQuestions ? (
-            <button onClick={handleSubmit} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selected}>
-              Submit
-            </button>
-          ) : (
-            <button onClick={handleNext} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selected}>
-              Next
-            </button>
-          )}
+          <button onClick={handleNext} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selected}>
+            Next
+          </button>
         </div>
       </div>
     </div>

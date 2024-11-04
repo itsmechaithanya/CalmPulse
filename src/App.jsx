@@ -11,6 +11,7 @@ import Homefour from './Components/HomeFour';
 import Knowmore from './Components/Knowmore';
 import Nextlevel from './Components/Nextlevel';
 import C1result from './Components/C1result';
+import Homeone from './Components/Homeone'
 import Home3 from './Components/Home3';
 import Home4 from './Components/Home4';
 import Finalresult from './Components/Finalresult';
@@ -87,6 +88,7 @@ function App() {
         <Route path="/home4" element={<Home4 />} />
         <Route path="/details" element={<Details />} />
         <Route path="/finalresult" element={<Finalresult />} />
+        <Route path="/homeone" element={<Homeone Questions={QuestionsOne} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/homethree" element={
   <Homethree Questions={Questionsthree} />
@@ -108,7 +110,7 @@ function App() {
   );
 }
 
-function QuestionsWrapper({ QuestionsOne, Questionstwo, Questionsthree, Questionsfour }) {
+function QuestionsWrapper({ QuestionsOne, Questionsthree, Questionsfour }) {
   const location = useLocation();
   const { questionSet } = location.state || { questionSet: 'QuestionsOne' };
 

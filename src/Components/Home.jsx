@@ -68,7 +68,7 @@ function Home() {
       </h1>
 
       <div className='h-[20vh] flex justify-center items-center'>
-        <Link to="/questions" state={{ questionSet }}>
+        <Link to="/homeone" state={{ questionSet }}> {/* Updated link to Homeone */}
           <button className='bg-white text-xl px-20 py-4 rounded-full'>
             Ready
           </button>
