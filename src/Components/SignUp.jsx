@@ -134,7 +134,7 @@ function SignUp() {
   };
 
   return (
-    <div className='h-screen w-screen bg-[#7A4BC8] overflow-hidden relative'>
+    <div className='h-screen w-screen bg-[#7D3D89] overflow-hidden relative'>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       <img className='h-[20vh] fixed -top-[5vh] -right-2' src={imggg} alt="" />
       <h1 className='text-white text-3xl font-semibold flex justify-center pt-[10vh]'>Sign Up</h1>

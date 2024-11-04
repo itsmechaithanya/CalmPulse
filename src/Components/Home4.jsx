@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function Home4() {
   return (
-    <div className="h-screen w-screen bg-[#7A4BC8] flex flex-col justify-center items-center">
+    <div className="h-screen w-screen bg-[#7D3D89] flex flex-col justify-center items-center">
       
       {/* Title */}
       <h1 className="text-white text-center text-3xl font-medium mb-6">

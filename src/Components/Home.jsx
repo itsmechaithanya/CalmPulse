@@ -48,7 +48,7 @@ function Home() {
   }, []);
 
   return (
-    <div className='h-screen w-screen bg-[#7A4BC8]'>
+    <div className='h-screen w-screen bg-[#7D3D89]'>
       {/* Welcome message that displays the user name */}
       <h1 className='text-2xl font-semibold pt-[6vh] pl-[4vh]'>
         Welcome {userName ? userName : 'Guest'}{' '}

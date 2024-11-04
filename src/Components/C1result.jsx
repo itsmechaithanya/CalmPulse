@@ -17,7 +17,7 @@ const CircularProgress = ({ percentage }) => {
 
 const C1result = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#7A4BC8] px-6 relative">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#7D3D89] px-6 relative">
 
       {/* Quote Section */}
       <div className="bg-white rounded-xl p-6 shadow-md mb-6 w-80 text-center">

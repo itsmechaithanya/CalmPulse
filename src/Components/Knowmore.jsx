@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function Knowmore() {
   return (
-    <div className="h-screen w-screen bg-[#7A4BC8] flex justify-center items-center relative">
+    <div className="h-screen w-screen bg-[#7D3D89] flex justify-center items-center relative">
       {/* Logo in the top-right corner */}
       <img 
         src={logo} 

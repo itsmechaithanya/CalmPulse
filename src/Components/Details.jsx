@@ -94,7 +94,7 @@ function Details() {
   };
 
   return (
-    <div className='h-screen w-screen bg-[#7A4BC8]'>
+    <div className='h-screen w-screen bg-[#7D3D89]'>
         <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         <img className='h-[20vh] absolute -top-[5vh] -right-2' src={imggg} alt="" />
         <div className='flex justify-center pt-[10vh]'>

@@ -163,7 +163,7 @@ function Homeone({ Questions }) {
   };
 
   return (
-    <div className='h-[100vh] w-[100vw] overflow-hidden bg-[#7A4BC8] flex flex-col items-center'>
+    <div className='h-[100vh] w-[100vw] overflow-hidden bg-[#7D3D89] flex flex-col items-center'>
       {/* Hi, message for user */}
       <h1 className='text-white text-[24px] mt-4'>
         Hi, {userName ? userName : 'Guest'}
@@ -211,17 +211,17 @@ function Homeone({ Questions }) {
         {/* Navigation Buttons at the bottom of the white frame */}
         <div className="flex justify-between w-full mt-auto pt-6 pb-4">
           {currentQuestionIndex > 0 && (
-            <button onClick={handlePrevious} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl'>
+            <button onClick={handlePrevious} className='bg-[#9676cd] text-white px-6 py-3 rounded-xl'>
               Previous
             </button>
           )}
           {currentQuestionIndex < questionCount - 1 && (
-            <button onClick={handleNext} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl' disabled={!selectedResponses[currentQuestionIndex]}>
+            <button onClick={handleNext} className='bg-[#9676cd] text-white px-6 py-3 rounded-xl' disabled={!selectedResponses[currentQuestionIndex]}>
               Next
             </button>
           )}
           {currentQuestionIndex === questionCount - 1 && (
-            <button onClick={handleSubmit} className='bg-[#6c63ff] text-white px-6 py-3 rounded-xl'>
+            <button onClick={handleSubmit} className='bg-[#9676cd] text-white px-6 py-3 rounded-xl'>
               Submit
             </button>
           )}

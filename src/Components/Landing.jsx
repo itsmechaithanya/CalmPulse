@@ -6,7 +6,7 @@ import FirstPageOne from '../assets/FirstPageOne.png'
 
 function Landing() {
   return (
-    <div className='h-screen w-screen overflow-hidden bg-[#7A4BC8] relative'>
+    <div className='h-screen w-screen overflow-hidden bg-[#7D3D89] relative'>
         <span className='absolute top-[10%]'>
             <img src={logo} alt="" /> 
         </span> 

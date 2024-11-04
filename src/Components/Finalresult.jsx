@@ -34,7 +34,7 @@ function Finalresult() {
   }, []);
 
   return (
-    <div className="h-screen w-screen bg-[#7A4BC8] flex justify-center items-center p-4">
+    <div className="h-screen w-screen bg-[#7D3D89] flex justify-center items-center p-4">
       <div className="bg-white rounded-lg p-6 w-[90vw] max-w-md flex flex-col items-center" style={{ height: 'auto' }}>
         
         {/* Header */}
