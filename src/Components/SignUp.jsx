@@ -17,40 +17,28 @@ function SignUp() {
 
   const navigate = useNavigate();
 
-  // Helper functions for validations
-  const validatePhoneNumber = (number) => {
-    const phoneRegex = /^[0-9]{10}$/;
-    return phoneRegex.test(number);
-  };
-
+  // Validate form input
   const validateForm = () => {
     let isValid = true;
 
-    // Name validation
+    // Log to verify what is getting validated
+    console.log("Validating Form: ", {name, phoneNumber, email, password, termsAccepted});
+
     if (!name.trim()) {
       toast.error("Name is required");
       isValid = false;
     }
-
-    // Phone number validation
     if (!phoneNumber.trim()) {
       toast.error("Phone number is required");
       isValid = false;
-    } else if (!validatePhoneNumber(phoneNumber)) {
-      toast.error("Phone number must be 10 digits");
-      isValid = false;
     }
-
-    // Email validation
     if (!email.trim()) {
       toast.error("Email is required");
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      toast.error("Invalid email format");
+      toast.error("Email is invalid");
       isValid = false;
     }
-
-    // Password validation
     if (!password.trim()) {
       toast.error("Password is required");
       isValid = false;
@@ -58,39 +46,48 @@ function SignUp() {
       toast.error("Password must be at least 8 characters long");
       isValid = false;
     }
-
-    // Terms and Conditions validation
     if (!termsAccepted) {
       toast.error("You must accept the Terms of Service and Privacy Policy");
       isValid = false;
     }
-
     return isValid;
   };
 
+  // Check if the email already exists in Firestore
   const checkIfEmailExists = async (email) => {
-    const userDoc = await getDoc(doc(db, "Users", email));
-    return userDoc.exists();
+    try {
+      const userDoc = await getDoc(doc(db, "Users", email));
+      return userDoc.exists();
+    } catch (error) {
+      console.error("Error checking email existence: ", error);
+      return false;
+    }
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    // Validate form before proceeding
     if (!validateForm()) {
       return;
     }
+
     try {
+      // Check if email is already in use
       const emailExists = await checkIfEmailExists(email);
       if (emailExists) {
         toast.error("This email is already in use. Please use a different email.");
         return;
       }
 
+      // Create a new user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
       if (user) {
         const userKey = user.uid;
 
+        // Store the user data in Firestore
         await setDoc(doc(db, "Users", userKey), {
           email: user.email,
           username: name,
@@ -102,7 +99,8 @@ function SignUp() {
       }
 
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Error creating account: " + error.message);
+      console.error("Firebase Error:", error);
     }
   };
 
@@ -112,6 +110,7 @@ function SignUp() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
+      // Check if the Google account email already exists
       const emailExists = await checkIfEmailExists(user.email);
       if (emailExists) {
         toast.error("This Google account is already registered. Please log in instead.");
@@ -120,6 +119,7 @@ function SignUp() {
 
       const userKey = user.uid;
 
+      // Save the new user data to Firestore
       await setDoc(doc(db, "Users", userKey), {
         email: user.email,
         username: user.displayName || '',
@@ -129,44 +129,52 @@ function SignUp() {
       toast.success("Signed up with Google successfully!");
       navigate('/login');
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Google sign-up error: " + error.message);
     }
   };
 
   return (
-    <div className='h-screen w-screen bg-[#7A4BC8] overflow-hidden relative'>
+    <div className='h-screen w-screen bg-[#7D3D89] overflow-hidden relative'>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       <img className='h-[20vh] fixed -top-[5vh] -right-2' src={imggg} alt="" />
       <h1 className='text-white text-3xl font-semibold flex justify-center pt-[10vh]'>Sign Up</h1>
+      
       <div className='flex flex-col justify-center mt-[3vh] items-center'>
         <button onClick={handleGoogleSignUp} className='text-white bg-black px-8 flex justify-center items-center py-5 rounded-full gap-3 shadow'>
           <FcGoogle size={"1.5em"} />Sign up with Google
         </button>
       </div>
+
       <div className='flex justify-center mt-2'>
         <h1 className=' capitalize'>Or continue with Email</h1>
       </div>
+
       <form onSubmit={handleRegister} className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10'>
         <input className='py-4 px-7 rounded-full w-full' type="text" placeholder='Enter Your Name' value={name} onChange={(e) => setName(e.target.value)} required />
         <input className='py-4 px-7 rounded-full w-full' type="tel" placeholder='Enter Your Phone number' value={phoneNumber} onChange={(e) => setPhone(e.target.value)} required />
         <input className='py-4 px-7 rounded-full w-full' type="email" placeholder='Enter Your Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input className='py-4 px-7 rounded-full w-full' type="password" placeholder='Enter Your Password' value={password} onChange={(e) => setPassword(e.target.value)} required minLength="8" />
+        <input className='py-4 px-7 rounded-full w-full' type="password" placeholder='Enter Your Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+        
         <div className='flex items-center px-3 mt-0'>
           <input className='h-5 w-5 ml-4 mr-5 bg-red-900 shadow' type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} required />
           <h1 className='text-white capitalize'>I agree with the Terms of Service and Privacy policy</h1>
         </div>
+        
         <div className='flex justify-end mt-0 mr-15'>
           <button type="submit" className='bg-black text-white px-8 py-5 rounded-full shadow'>Create Account</button>
         </div>
       </form>
+      
       <div className='flex justify-end mt-10 mr-5 text-white'>
-        <h1 className=' capitalize'><Link to="/login">Already have an account?</Link></h1>
+        <h1 className=' capitalize'><a href="">Already have an account?</a></h1>
       </div>
-      <div className='flex justify-end mt-2 mr-5 '>
+
+      <div className='flex justify-end mt-2 mr-5'>
         <Link to="/login">
           <button className='bg-black text-white px-16 py-5 rounded-full shadow'>Log In</button>
         </Link>
       </div>
+
       <img className='fixed -bottom-[30vh] -left-[11vh] h-[60vh]' src={imgg} alt="" />
     </div>
   );
