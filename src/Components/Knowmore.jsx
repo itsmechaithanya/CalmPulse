@@ -19,12 +19,12 @@ function Knowmore() {
         <div className="flex flex-col items-center justify-center h-full">
           <img src={illustration} alt="Illustration" className="mb-8 w-60 h-60" /> {/* Decreased size of the image */}
           <Link to="/nextlevel">
-            <button className="bg-[#9676cd] text-white text-lg font-semibold py-6 px-6 rounded-full mb-4 shadow-md hover:shadow-lg transition-all">
+            <button className="bg-[#9676cd] text-white text-lg font-semibold py-4 px-6 rounded-full mb-4 shadow-md hover:shadow-lg transition-all">
               Want To Know More?
             </button>
           </Link>
           <Link to="/c1result">
-            <button className="bg-[#c28bcf] text-black text-lg font-semibold py-6 px-6 rounded-full shadow-md hover:shadow-lg transition-all">
+            <button className="bg-[#c28bcf] text-black text-lg font-semibold py-4 px-6 rounded-full shadow-md hover:shadow-lg transition-all">
               Get Result
             </button>
           </Link>
