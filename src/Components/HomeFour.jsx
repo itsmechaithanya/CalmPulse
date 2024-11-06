@@ -121,19 +121,21 @@ function Homefour({ Questions }) {
     const userDocRef = doc(db, 'Users', userId);
     const userDocSnap = await getDoc(userDocRef);
     let homethreeTotalScore = 0;
+    let homeoneTotalScore = 0;
 
     if (userDocSnap.exists()) {
       const userData = userDocSnap.data();
       homethreeTotalScore = userData.homethreeTotalScore || 0; // Get Homethree total score
+      homeoneTotalScore = userData.totalScore || 0; // Get Homeone total score
     } else {
       console.log("No Homethree total score found in Firestore.");
     }
 
-    const combinedTotalScore = homefourTotalScore + homethreeTotalScore; // Combine scores
+    const combinedTotalScore = homefourTotalScore + homethreeTotalScore + homeoneTotalScore; // Combine scores
     console.log("Combined total score:", combinedTotalScore); // Log combined score
 
     // Calculate percentage
-    const totalQuestions = 18 + 7; // Total questions in homethree and homefour
+    const totalQuestions = 20 + 18 + 7; // Total questions in homeone, homethree, and homefour
     const maxScore = totalQuestions * 4; // Max score is 4 per question
     const combinedPercentage = (combinedTotalScore / maxScore) * 100; // Calculate percentage
 

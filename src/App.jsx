@@ -5,7 +5,6 @@ import SignUp from './Components/SignUp';
 import LoginPage from './Components/LoginPage';
 import Details from './Components/Details';
 import Home from './Components/Home';
-import Questions from './Components/Questions';
 import Homethree from './Components/Homethree';
 import Homefour from './Components/HomeFour';
 import Knowmore from './Components/Knowmore';
@@ -98,7 +97,7 @@ function App() {
   <Homefour Questions={Questionsfour} />
 } />
 
-        <Route path="/questions" element={
+        <Route path="/homeone" element={
           <QuestionsWrapper
             QuestionsOne={QuestionsOne}
             Questionsthree={Questionsthree}
