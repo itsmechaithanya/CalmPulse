@@ -48,13 +48,9 @@ const C1result = () => {
   }, []); // Empty dependency array, so it runs only once when the component mounts
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#7A4BC8] px-6 relative mt-10"> {/* Adjusted margin-top to move everything upwards */}
+    <div className="flex flex-col items-center overflow-hidden h-screen bg-[#7A4BC8] px-6 relative "> {/* Adjusted margin-top to move everything upwards */}
       {/* Quote Section */}
-      <div className="bg-white rounded-xl p-6 shadow-md mb-6 w-80 text-center mt-10"> {/* Adjusted margin-top to move everything upwards */}
-        <p className="text-gray-700 text-lg font-medium">
-          "It's okay to feel overwhelmed sometimes. You're doing your best, and that's enough."
-        </p>
-      </div>
+      <div className='h-[35vh] w-screen flex justify-center items-center px-[14vw]'><h1 className='text-white text-[3vh]'>A low score indicates good mental health, while a higher score suggests you may need support.</h1></div>
 
       {/* Circular Progress */}
       <CircularProgress percentage={totalScore} />
@@ -63,12 +59,34 @@ const C1result = () => {
       <div className="text-white text-xl mt-4">
       </div>
 
+      <div className='mt-[2vh]'><h1 className='text-white text-[2vh]'>And we say that</h1></div>
+      
+      <div className="bg-white rounded-xl p-6 shadow-md mb-6 w-80 text-center mt-10"> {/* Adjusted margin-top to move everything upwards */}
+        <p className="text-gray-700 text-lg font-medium">
+          {getMessage(totalScore)} {/* Call the function to get the message based on totalScore */}
+        </p>
+      </div>
+
       {/* Illustration */}
-      <div className="absolute bottom-20 w-full mt-10"> {/* Adjusted margin-top to move everything upwards */}
+      <div className="absolute bottom-0 left-[3vw] w-full mt-10"> {/* Adjusted margin-top to move everything upwards */}
         <img src={illustration} alt="Illustration" className="w-95 h-90" /> {/* Decreased size of the image */}
       </div>
     </div>
   );
+};
+
+// Function to get the message based on totalScore
+const getMessage = (score) => {
+  if (score >= 0 && score < 30) {
+    return "You're in great mental health.";
+  } else if (score >= 30 && score < 60) {
+    return "Consider focusing on self-improvement.";
+  } else if (score >= 60 && score < 90) {
+    return "It might be helpful to seek some guidance.";
+  } else if (score >= 90 && score <= 100) {
+    return "It's important to consult a therapist soon.";
+  }
+  return ""; // Default case if score is out of expected range
 };
 
 export default C1result;
