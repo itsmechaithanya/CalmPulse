@@ -133,15 +133,16 @@ function Homeone({ Questions }) {
     await storeResponse(); // Store the last response
     // Store total score if needed
     const user = auth.currentUser;
+    let totalScore = 0; // Define totalScore here
     if (user) {
       const userDocRef = doc(db, 'Users', user.uid);
-      const totalScore = selectedResponses.reduce((acc, response) => acc + getScore(response), 0); // Calculate total score
+      totalScore = selectedResponses.reduce((acc, response) => acc + getScore(response), 0); // Calculate total score
       await setDoc(userDocRef, {
         totalScore: totalScore,
       }, { merge: true });
     }
 
-    console.log("Final Total Score: ", totalScore);
+    console.log("Final Total Score: ", totalScore); // Now totalScore is defined
 
     navigate('/knowmore'); // Navigate to Knowmore page after submitting
   };
