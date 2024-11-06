@@ -5,7 +5,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 function Homeone({ Questions }) {
-  // Check if Questions is defined and has a length
   const questionCount = Questions && Questions.length ? Questions.length : 0; // Safely get the length
   const [selectedResponses, setSelectedResponses] = useState(Array(questionCount).fill(''));
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -17,7 +16,6 @@ function Homeone({ Questions }) {
     setProgressPercentage((currentQuestionIndex / questionCount) * 100);
   }, [currentQuestionIndex, questionCount]);
 
-  // Fetch the user's name from Firestore
   useEffect(() => {
     const fetchUserData = async (uid) => {
       try {
@@ -35,7 +33,6 @@ function Homeone({ Questions }) {
       }
     };
 
-    // Listen for authentication state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         fetchUserData(user.uid); // Fetch user data from Firestore
@@ -44,7 +41,6 @@ function Homeone({ Questions }) {
       }
     });
 
-    // Clean up the listener on unmount
     return () => unsubscribe();
   }, []);
 
@@ -52,13 +48,13 @@ function Homeone({ Questions }) {
     const updatedResponses = [...selectedResponses];
     updatedResponses[currentQuestionIndex] = option;
     setSelectedResponses(updatedResponses);
-    console.log(`Option selected: ${option}`); // Log the selected option
+
+    console.log(`Option selected: ${option}`);
   };
 
   const getScore = (option) => {
-    // Define the special scoring for specific questions
     const specialQuestions = [1, 2, 5, 8, 11, 15, 16, 19, 20];
-    const isSpecialQuestion = specialQuestions.includes(currentQuestionIndex + 1); // Check for 1-based index
+    const isSpecialQuestion = specialQuestions.includes(currentQuestionIndex + 1); // 1-based index
 
     if (isSpecialQuestion) {
       switch (option) {
@@ -76,7 +72,6 @@ function Homeone({ Questions }) {
           return 0;
       }
     } else {
-      // Default scoring
       switch (option) {
         case 'Strongly Disagree':
           return 1;
@@ -103,20 +98,22 @@ function Homeone({ Questions }) {
     }
 
     const userId = user.uid;
-    const score = getScore(selectedResponses[currentQuestionIndex]); // Get score based on selected response
-    const questionIndex = currentQuestionIndex + 1; // Store 1-based index
+    const score = getScore(selectedResponses[currentQuestionIndex]);
+    const questionIndex = currentQuestionIndex + 1;
 
     try {
       const userDocRef = doc(db, 'Users', userId);
+      // Store the individual question response
       await setDoc(userDocRef, {
         responses: {
           [`homeone_question_${questionIndex}`]: {
             option: selectedResponses[currentQuestionIndex],
             score: score,
-            index: questionIndex, // Store the question index
+            index: questionIndex,
           },
         },
       }, { merge: true });
+
       console.log(`Response stored: Option: ${selectedResponses[currentQuestionIndex]}, Score: ${score}, Index: ${questionIndex}`);
     } catch (error) {
       console.error("Error storing response:", error);
@@ -134,32 +131,19 @@ function Homeone({ Questions }) {
 
   const handleSubmit = async () => {
     await storeResponse(); // Store the last response
-    const totalScore = selectedResponses.reduce((acc, response) => acc + getScore(response), 0); // Calculate total score
-    console.log("Total score from Homeone:", totalScore); // Log total score
-    await storeTotalScore(totalScore); // Store total score in Firebase
-    navigate('/knowmore'); // Navigate to Knowmore page after submitting
-  };
-
-  // Function to store total score in Firebase
-  const storeTotalScore = async (totalScore) => {
+    // Store total score if needed
     const user = auth.currentUser;
-
-    if (!user) {
-      console.error("User is not authenticated.");
-      return;
-    }
-
-    const userId = user.uid;
-
-    try {
-      const userDocRef = doc(db, 'Users', userId);
+    if (user) {
+      const userDocRef = doc(db, 'Users', user.uid);
+      const totalScore = selectedResponses.reduce((acc, response) => acc + getScore(response), 0); // Calculate total score
       await setDoc(userDocRef, {
-        homeoneTotalScore: totalScore, // Store total score from Homeone
+        totalScore: totalScore,
       }, { merge: true });
-      console.log("Homeone total score stored successfully.");
-    } catch (error) {
-      console.error("Error storing Homeone total score:", error);
     }
+
+    console.log("Final Total Score: ", totalScore);
+
+    navigate('/knowmore'); // Navigate to Knowmore page after submitting
   };
 
   return (
