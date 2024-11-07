@@ -79,7 +79,7 @@ function LoginPage() {
       <h1 className='text-white text-3xl font-semibold flex justify-center pt-[10vh]'>Log In</h1>
       
       {/* Google Login Button */}
-      <div className='flex flex-col justify-center mt-[7vh] items-center'>
+      <div className='flex flex-col justify-center mt-[3vh] items-center'>
         <button onClick={handleGoogleLogin} className='text-white bg-black px-8 flex justify-center items-center py-5 rounded-full gap-3 shadow'>
           <FcGoogle size={"1.5em"} />Log In with Google
         </button>
@@ -91,7 +91,7 @@ function LoginPage() {
       
       {/* Form for Email/Password */}
       <form onSubmit={handleLogin}>
-        <div className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-[10vh]'>
+        <div className='flex flex-col gap-5 ml-5 mr-5 justify-center mt-10'>
           <input
             className='py-4 px-7 rounded-full'
             type="text"
@@ -118,7 +118,7 @@ function LoginPage() {
         </div>
       </form>
       
-      <div className='flex justify-center flex-col items-center mt-[9vh]'>
+      <div className='mt-20 ml-12 absolute z-10'>
         <h1 className='capitalize text-white mb-3'>
           Don't have an account?
         </h1>
@@ -127,7 +127,7 @@ function LoginPage() {
         </Link>
       </div>
 
-      {/* <img className='fixed bottom-0 right-0 h-[35vh]' src={imgggg} alt="" />    */}
+      <img className='fixed bottom-0 right-0 h-[35vh]' src={imgggg} alt="" />   
     </div>
   );
 }

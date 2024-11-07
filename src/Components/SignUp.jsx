@@ -160,22 +160,22 @@ function SignUp() {
           <h1 className='text-white capitalize'>I agree with the Terms of Service and Privacy policy</h1>
         </div>
         
-        <div className='flex  justify-center mt-0 '>
+        <div className='flex justify-end mt-0 mr-15'>
           <button type="submit" className='bg-black text-white px-8 py-5 rounded-full shadow'>Create Account</button>
         </div>
       </form>
       
-      <div className='flex justify-center mt-[4vh]  text-white'>
+      <div className='flex justify-end mt-10 mr-5 text-white'>
         <h1 className=' capitalize'><a href="">Already have an account?</a></h1>
       </div>
 
-      <div className='flex justify-center mt-2 '>
+      <div className='flex justify-end mt-2 mr-5'>
         <Link to="/login">
           <button className='bg-black text-white px-16 py-5 rounded-full shadow'>Log In</button>
         </Link>
       </div>
 
-      {/* <img className='fixed -bottom-[30vh] -left-[11vh] h-[60vh]' src={imgg} alt="" /> */}
+      <img className='fixed -bottom-[30vh] -left-[11vh] h-[60vh]' src={imgg} alt="" />
     </div>
   );
 }
