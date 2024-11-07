@@ -50,12 +50,12 @@ const C1result = () => {
   return (
     <div className="flex flex-col items-center overflow-hidden h-screen bg-[#7A4BC8] px-6 relative "> {/* Adjusted margin-top to move everything upwards */}
       {/* Quote Section */}
-      <div className='h-[35vh] w-screen flex justify-center items-center px-[14vw]'><h1 className='text-white text-[3vh]'>A low score indicates good mental health, while a higher score suggests you may need support.</h1></div>
+      <div className='h-[25vh] w-screen flex justify-center items-center text-center px-[14vw]'><h1 className='text-white text-[3vh] capitalize'>score below depicts your stress level</h1></div>
 
       {/* Circular Progress */}
       <CircularProgress percentage={totalScore} />
 
-      <div className='mt-[3vh]'><h1 className='text-white text-[2vh]'>And we say that</h1></div>
+      <div className='mt-[6vh]'><h1 className='text-white text-[2vh]'>And we say that</h1></div>
       
       <div className="bg-white rounded-xl p-6 shadow-md mb-6 w-80 text-center mt-10"> {/* Adjusted margin-top to move everything upwards */}
         <p className="text-gray-700 text-lg font-medium">
