@@ -55,11 +55,7 @@ const C1result = () => {
       {/* Circular Progress */}
       <CircularProgress percentage={totalScore} />
 
-      {/* Optionally, display the total score */}
-      <div className="text-white text-xl mt-4">
-      </div>
-
-      <div className='mt-[2vh]'><h1 className='text-white text-[2vh]'>And we say that</h1></div>
+      <div className='mt-[3vh]'><h1 className='text-white text-[2vh]'>And we say that</h1></div>
       
       <div className="bg-white rounded-xl p-6 shadow-md mb-6 w-80 text-center mt-10"> {/* Adjusted margin-top to move everything upwards */}
         <p className="text-gray-700 text-lg font-medium">

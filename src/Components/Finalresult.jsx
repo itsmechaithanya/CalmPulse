@@ -2,6 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { db, auth } from './firebase'; // Import Firestore and Auth
 import { doc, getDoc } from 'firebase/firestore';
 
+const CircularProgress = ({ percentage }) => {
+  const circleStyle = {
+    background: `conic-gradient(#4caf50 ${percentage * 3.6}deg, #e0e0e0 0deg)`,
+  };
+
+  return (
+    <div className="relative">
+      <div className="w-32 h-32 rounded-full border-8 border-[#7ED957] flex items-center justify-center" style={circleStyle}>
+        <span className="text-4xl font-bold text-black">{percentage}%</span>
+      </div>
+    </div>
+  );
+};
+
 function Finalresult() {
   const [combinedScorePercentage, setCombinedScorePercentage] = useState(null); // State for combined score percentage
 
@@ -54,11 +68,7 @@ function Finalresult() {
           <p className="text-black text-2xl font-semibold mb-2 text-center">
             Your Stress Effect is
           </p>
-          <div className="relative">
-            <div className="w-32 h-32 rounded-full border-8 border-[#7ED957] flex items-center justify-center">
-              <span className="text-4xl font-bold text-black">{formattedScorePercentage !== 'Loading...' ? `${formattedScorePercentage}%` : 'Loading...'}</span>
-            </div>
-          </div>
+          <CircularProgress percentage={formattedScorePercentage !== 'Loading...' ? parseFloat(formattedScorePercentage) : 0} />
         </div>
 
         {/* Advice */}
